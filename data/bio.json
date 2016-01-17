@@ -1,0 +1,16 @@
+{
+"bio":{
+  "Education" : [ 
+    "BS, Remote Sensing,Wuhan University" ,
+    "MS, Atmospheric Science, Tsinghua University" 
+  ],
+  "Skills" : [
+    "Programming: JAVA, C++, Python" ,
+    "Tools: GIT&GITHUB, R Studio" 
+  ],
+  "Experience" : [
+    "Risk Analyst, Minsheng Financial Leasing, Jul 2013-Dec 2013" ,
+    "Software Developer, Cooperative Institute for Research in Environmental Sciences at CU-Boulder, Aug 2015- Dec 2015" 
+  ]
+}
+}
