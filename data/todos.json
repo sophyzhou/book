@@ -1,0 +1,55 @@
+{
+  "todos" : {
+    "tasks" : [ {
+      "deadline" : "2016-01-11",
+      "name" : "fork repo",
+      "priority" : "high",
+      "type" : "personal"
+    }, {
+      "deadline" : "2016-01-11",
+      "name" : "copy template",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-11",
+      "name" : "modify team name",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-11",
+      "name" : "deploy the app to Firebase",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-11",
+      "name" : "use Card class in materializecss",
+      "priority" : "high",
+      "type" : "personal"
+    }, {
+      "deadline" : "2016-01-15",
+      "name" : "add properties in task structure ",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-15",
+      "name" : "make app pretty",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-15",
+      "name" : "set more than 10 tasks",
+      "priority" : "high",
+      "type" : "team"
+    }, {
+      "deadline" : "2016-01-17",
+      "name" : "add more data to enrich resume",
+      "priority" : "high",
+      "type" : "personal"
+    }, {
+      "deadline" : "2016-01-17",
+      "name" : "data must be pulled from Firebase in realtime",
+      "priority" : "high",
+      "type" : "personal"
+    } ]
+  }
+}
