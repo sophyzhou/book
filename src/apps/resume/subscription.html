@@ -28,7 +28,7 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <a class="waves-effect waves-light btn green accent-4" id="submit">Submit</a>
+            <a class="waves-effect waves-light btn" id="submit">Submit</a>
           </div>
         </div>
 
@@ -37,11 +37,17 @@
           <ul class="collection" id="emails">
           </ul>
         </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <a href="index.html" class="waves-effect waves-light btn" id="home">Return</a>
+          </div>
+        </div>
       </div>
 
       <script>
         var ref = new Firebase('https://ucdhw1.firebaseio.com');
-        var refsub = ref.child('bio/subscriber');
+        var refsub = ref.child('bio/Subscriber');
         $('#submit').click(function(){
           // TODO: add code to submit an email address to your own Firebase
             var address = $('#email').val();
@@ -58,7 +64,7 @@
         })
         // TODO: add code to pull emaill addresses from your own Firebase,
         // and populate "#emails" with these email addresses
-          ref.child('bio/subscriber').on('value', function(snapshot) {
+          ref.child('bio/Subscriber').on('value', function(snapshot) {
           $('#emails').empty();
           var addresses = snapshot.val();
           for(key in addresses){

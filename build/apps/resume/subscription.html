@@ -28,7 +28,7 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <a class="waves-effect waves-light btn green accent-4" id="submit">Submit</a>
+            <a class="waves-effect waves-light btn" id="submit">Submit</a>
           </div>
         </div>
 
@@ -36,6 +36,12 @@
           <h3>Current Subscribers</h3>
           <ul class="collection" id="emails">
           </ul>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <a href="index.html" class="waves-effect waves-light btn" id="home">Return</a>
+          </div>
         </div>
       </div>
 
@@ -47,7 +53,7 @@
             var address = $('#email').val();
           
           // Validation
-            if(address.indexOf("@") == -1){
+            if(address.indexOf("@") == false){
               alert("Invalid email address!");
               return false;
             }
