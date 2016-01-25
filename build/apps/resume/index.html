@@ -17,9 +17,17 @@
 
       <div class="container">
 
-        <h1>Yun Zhou</h1>
-        <div id="content"> </div>
+        <h1>
+        <div align="center">Yun Zhou</div>
+        </h1>
 
+        <div align="center">
+        <a href="subscription.html" class="waves-effect waves-light btn green accent-4" id="submit">Subscribe</a>
+        </div>
+
+        <div id="content"> </div>
+        <h2>Tasks</h2>
+        <ul class="collapsible" data-collapsible="expandable", id="tasks"</ul>
       </div>
 
       <script>
@@ -32,18 +40,64 @@
                 var titles = snapshot.val()
                 for (title in titles)
                 {
-                    console.log(titles[title])
-                    $('#content').append('<h2>'+ title + '</h2>')
-                	$('#content').append('<ul class="collection" id="' + title + '">')
-				    var elements = titles[title]
-					for (element in elements)
-					{
-						$('#'+title).append('<li class="collection-item">' + elements[element] + '</li>')
-					} 
-					$('#content').append('</ul>')
-				}
-                }
-                )
+                      console.log(titles[title])
+                      $('#content').append('<h2>'+ title + '</h2>')
+                    	$('#content').append('<ul class="collection" id="' + title + '">')
+			           	    var elements = titles[title]
+				            	for (element in elements)
+					            {
+					                 	$('#'+title).append('<li class="collection-item">' + elements[element] + '</li>')
+				            	} 
+					            $('#content').append('</ul>')
+				        }
+              }
+        )
+
+       // create a firebase reference to the root
+        var ref = new Firebase('https://ucdd-todos-matrix.firebaseio.com/')
+
+
+        function fill_container(task) {
+            if (task["priority"] == null) {
+                priority = "None"
+            } else {
+                priority = {"1":"high","2":"medium","3":"low"}[task["priority"]]
+            }
+            if(task["completed"] == false){
+                $('#tasks').append('<li class="" xmlns="http://www.w3.org/1999/html"> \
+                <div class="collapsible-header" style="padding-top: 6px"> <input type="checkbox" id='+key+' "\ ' +
+                        'onclick=CheckButton("'+ key +'")> <label for='+key+'><font color="black">' + task["title"] + '</font></label></div>'  +
+                        '<div class="collapsible-body" style="display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 5px; padding-left: 50px; margin-bottom: 0px;">'
+                        + 'Priority:\t' + priority + '<br>'
+                        + 'Type:\t' + task["type"] + '<br>'
+                        + 'Deadline:\t' + task["deadline"] + '<br> '
+                        + 'Assigned:\t' + task["assigned"] + '</br>' +
+                        '</li>')
+            } else {
+                  $('#tasks').append('<li class="" xmlns="http://www.w3.org/1999/html"> \
+                  <div class="collapsible-header" style="padding-top: 6px"><input type="checkbox" id='+key+' checked="checked" "\ ' +
+                        'onclick=CheckButton("'+ key +'")><label for='+key+'><font color="#cccccc">' + task["title"] + '</font></label></div>'  +
+                        '<div class="collapsible-body" style="display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 5px; padding-left: 50px; margin-bottom: 0px;">'
+                        + 'Priority:\t' + priority + '<br>'
+                        + 'Type:\t' + task["type"] + '<br>'
+                        + 'Deadline:\t' + task["deadline"] + '<br> '
+                        + 'Assigned:\t' + task["assigned"] + '</br>' +
+                        '</li>')
+               }
+        }
+
+        ref.child('todos/tasks').on("value", function(snapshot) {
+          var tasks = snapshot.val()
+          $('#tasks').empty()
+          for (key in tasks) {
+            task = tasks[key]
+            if (task["assigned"] == "sophyzhou") {
+              fill_container(task);
+            } else {
+              continue
+          }
+          }})
+  
 
       </script>
     </body>
