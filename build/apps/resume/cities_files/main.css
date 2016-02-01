@@ -1,0 +1,27 @@
+h2
+{
+	font-size: 300%;
+	font-weight: bold;
+	color: black;
+	opacity: .75;
+}
+p
+{
+	font-size: 50px;
+}
+
+.item-header
+{
+	font-size: 200%;
+	font-weight: none;
+	color: black;
+	opacity: .75;
+}
+
+.item-detail
+{
+	font-size: 100%;
+	font-style: italic;
+	color: black;
+	opacity: .75;
+}
