@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Yun Zhou in ReactJS</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+
+
+
+    <script src="lib/react.js"></script>
+    <script src="lib/react-dom.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+      <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+ 
+    <div id="navbar"></div>
+<!--     <div class="card blue-grey lighten-3 white-text">
+ -->    <div class="container">
+      <h2 id="about-heading">About Me</h2>
+      <div id="about"></div>
+
+     <h2 id="educations-heading">Education</h2>
+      <div id="educations"></div>
+
+      <h2 id="skills-heading">Skills</h2>
+      <div id="skills"></div>
+
+      <h2 id="tasks-heading">Tasks</h2>
+      <div id="tasks"></div>
+
+      <h2 id="cities-heading">Favorite Cities</h2>
+      <div id="cities"></div>
+<!--     </div>
+ -->  </div>
+    <script>
+      // MyComponents is a global object where each property is a reference to a component class
+      MyComponents = {}
+    </script>
+
+
+ <style>
+      html {
+        background: url(sf.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
+
+    <!-- import each component class in components/ -->
+
+    <script type="text/babel" src="components/navbar.js"></script>
+
+    <script type="text/babel" src="components/about.js"></script>
+
+    <script type="text/babel" src="components/education.js"></script>
+    
+    <script type="text/babel" src="components/task-list.js"></script>
+    <script type="text/babel" src="components/city-list.js"></script>
+    <script type="text/babel" src="components/skill-list.js"></script>
+
+    <!-- render react components -->
+    <script type="text/babel">
+
+    //Resume 
+    var ref = new Firebase('https://ucdhw1.firebaseio.com/')
+    ref.child('bio').once('value', function(snapshot){
+      var myinfo = snapshot.val();
+  
+      ReactDOM.render(
+        <MyComponents.NavBar name={myinfo.About.Name}/>,
+        $('#navbar').get(0)
+      );
+      
+      //About 
+      ReactDOM.render(
+        // <MyComponents.About values={{name: myinfo.About.Name, description: myinfo.About.Description, email: myinfo.About.Email, current: myinfo.About.Current, github: myinfo.About.Github}}/>,
+        // $('#about').get(0)
+         <MyComponents.About name={myinfo.About.Name} github={myinfo.About.Github} email={myinfo.About.Email} current = {myinfo.About.Current} description={myinfo.About.Description}/>,
+        $('#about').get(0)
+      );
+
+      //Education
+      ReactDOM.render(
+        <MyComponents.EducationList educations={myinfo.Education}/>,
+        $('#educations').get(0)
+      );
+
+      //Skills
+      ReactDOM.render(
+        <MyComponents.SkillList skills={myinfo.Skills}/>,
+        $('#skills').get(0)
+      );
+      
+    })
+    
+    //Tasks
+    var ref = new Firebase('https://ucdd-todos-matrix.firebaseio.com/')
+    ref.child('todos/tasks').on('value', function(snapshot){
+      var data = snapshot.val();
+  
+      ReactDOM.render(
+        <MyComponents.TaskList tasks={data}/>,
+        $('#tasks').get(0)
+      );
+    });
+    
+    //Cities
+    var weatherRef = new Firebase('https://publicdata-weather.firebaseio.com')
+
+    var cities = {};
+      
+    // read data on update
+    weatherRef.child('denver').on('value', function(snapshot){
+      updateCityData(snapshot, "Denver");
+    });
+    weatherRef.child('seattle').on('value', function(snapshot){
+      updateCityData(snapshot, "Seattle");
+    });
+    weatherRef.child('sanfrancisco').on('value', function(snapshot){
+      updateCityData(snapshot, "San Francisco");
+    });
+    weatherRef.child('newyork').on('value', function(snapshot){
+      updateCityData(snapshot, "New York");
+    });
+    weatherRef.child('boston').on('value', function(snapshot){
+      updateCityData(snapshot, "Boston");
+    });
+
+    function updateCityData(snapshot, name){
+      var city = snapshot.val()
+      cities[name] = snapshot.val();
+      ReactDOM.render(
+        <MyComponents.CityList cities={cities}/>,
+        $('#cities').get(0)
+      );
+    }
+
+    </script>
+  </body>
+</html>
