@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+
+    <body>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+        <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
+        <style>
+          html {
+          background: url(img/background.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          }
+        </style>
+
+        <div class="container-full">
+        <nav>
+          <div class="nav-wrapper black">
+            <a href="#!" class="brand-logo">Movie Together</a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="index.html"><i class="material-icons">home</i></a></li>
+              <li><a href="index.html"><i class="material-icons">refresh</i></a></li>
+              <li><a href="#modalLogin" class="modal-trigger"><i class="mdi-action-perm-identity"></i></a></li>
+              <li><a href="about.html"><i class="material-icons">view_module</i></a></li>
+
+            </ul>
+          </div>
+        </nav>
+        </div>
+        
+        <div class="container">
+        <h4>About Movie Together</h4>
+          <ul class="collapsible popout" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">info_outline</i>App Name and Activity Type</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>Movie Together: this is an App which provides a platform for a group of users to watch movie together and discuss the movie at the same time.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">people</i>Collaborative Activity Type</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>This App is for entertainment.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">group_work</i>Ideal Number of Users</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>Around 10-15.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">settings</i>Necessary User Skills</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>Users do not need any specific skills to use this App.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">store</i>How can a person see what everyone else is doing?</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>A person can see other people's discussion on the movie he or she is watching.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">perm_identity</i>How can a person see the most recent result of everyone collaborative effort?</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>A person can see the chat history about movies.</p></div>
+            </li>
+            <li>
+              <div class="collapsible-header orange darken-2 white-text"><i class="material-icons">surround_sound</i>What can an admin see?</div>
+              <div class="collapsible-body" style="background-color: white; opacity: 0.6;"><p>The admin can view everything the users can. Besides, the admin can view the status and infomation of users, view and manage the chatting room. The admin can also add movies to the movie list and hottest movie</p></div>
+            </li>
+
+
+          </ul>
+
+
+        </div>
+
+<!--login modal-->
+<div id="modalLogin" class="modal">
+    <div class="modal-content">
+      <center><a class="waves-effect waves-orange orange btn modal-trigger" style="width:250px;" href="#modalLogin1">Login as User</a></center><br>
+
+      <div class="row "></div>
+
+      <center><a class="waves-effect waves-orange orange btn modal-trigger" style="width:250px;" href="#modalLogin2">Login as Admin</a></center><br>
+
+      <div class="row "></div>
+
+      <center><a href="about.html" class="waves-effect waves-orange orange btn modal-close" style="width:250px;">Return</a></center>
+      <div class="row "></div>
+
+<!-- 
+      <li><a href="#modalLogin2" class="modal-trigger"><i class="mdi-action-perm-identity"></i>Login as Admin</a></li> -->
+
+    </div>
+</div>
+
+<div id="modalLogin1" class="modal">
+    <div class="modal-content">
+        <h2 class="center-align">Login as User</h2>
+        <div class="center-align">
+            <div class="divider"></div>
+            <form class="col s12">
+                <div class="row center-align">
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Username</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text ">
+                        <i class="mdi-action-lock-open prefix"></i>
+                        <input id="icon_password" type="password" class="validate">
+                        <label for="icon_password">Password</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <input type="checkbox" class="orange-text" id="filled-in-box" checked="checked">
+                        <label for="filled-in-box">Remember me next time</label>
+                    </div>
+                </div>
+            </form>
+            <div class="divider"></div>
+            <p>
+                <a href="about.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="index.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="modalLogin2" class="modal">
+    <div class="modal-content">
+        <h2 class="center-align">Login as Admin</h2>
+        <div class="center-align">
+            <div class="divider"></div>
+            <form class="col s12">
+                <div class="row center-align">
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Username</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text ">
+                        <i class="mdi-action-lock-open prefix"></i>
+                        <input id="icon_password" type="password" class="validate">
+                        <label for="icon_password">Password</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <input type="checkbox" class="orange-text" id="filled-in-box" checked="checked">
+                        <label for="filled-in-box">Remember me next time</label>
+                    </div>
+                </div>
+            </form>
+            <div class="divider"></div>
+            <p>
+                <a href="about.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="admin.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+     
+     <script type="text/javascript">
+       $(document).ready(function(){
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal();
+        });
+        
+     </script>
+
+        <footer class="page-footer" style="background-color: black; opacity:0.6">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Help Movie Together Grow</h5>
+                <p class="grey-text text-lighten-4">We hope you have enjoyed using Movie Together! If you feel Movie Together has made your life colorful and want to support us, send us over a donation! Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                <button class="btn waves-effect waves-orange orange lighten-3" type="submit" name="action" alt="PayPal - The safer, easier way to pay online!">Donate Now</button>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="www.facebook.com">Facebook</a></li>
+                  <li><a class="grey-text text-lighten-3" href="www.twitter.com">Twitter</a></li>
+                  <li><a class="grey-text text-lighten-3" href="www.google.com">G+</a></li>
+                  <li><a class="grey-text text-lighten-3" href="www.youtube.com">Youtube</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container"><center>
+            © 2016-2017 Sophia Zhou, All rights reserved
+            </center>
+            </div>
+          </div>
+        </footer>
+
+ 
+    </body>
+  </html>
