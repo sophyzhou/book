@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
+<style>
+    html {
+        background: url(img/background.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+</style>
+
+<style>
+    .container ul li {
+        list-style-type: circle;
+        padding-left: 10px;
+        margin-left: 30px;
+        font-weight: bold;
+
+    }
+    h2 {
+        border-bottom: solid #ccc 1px;
+        font-weight: bold;
+
+    }
+    h3 {
+        font-style: italic;
+        font-weight: bold;
+
+    }
+    code {
+        border: 1px #ddd solid;
+        font-weight: bold;
+
+    }
+    p{
+        font-weight: bold;
+
+    }
+</style>
+
+
+<div class="container-full">
+    <nav>
+        <div class="nav-wrapper black">
+            <a href="#!" class="brand-logo">Movie Together</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html"><i class="material-icons">home</i></a></li>
+                <li><a href="index.html"><i class="material-icons">refresh</i></a></li>
+                <li><a href="#modalLogin" class="modal-trigger"><i class="mdi-action-perm-identity"></i></a></li>
+                <li><a href="about.html"><i class="material-icons">view_module</i></a></li>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="container flow-text">
+    <h1 id="data-models">Data Models</h1>
+    <div class = "container-full" style ="background-color: antiquewhite;opacity:0.7">
+    <p>The data model for this project would require 3 types of data.</p>
+    <ul>
+        <li>Users</li>
+        <li>Movies</li>
+        <li>Chatting Rooms</li>
+    </ul>
+    <p>To ackomplish this We could create a data model like below: </p>
+    <ul>
+        <li><p>Users</p>
+            <ul>
+                <li>key - user<ul>
+                    <li>key - username</li>
+                    <li>key - email</li>
+                    <li>key - imageURL</li>
+                </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><p>Movies </p>
+            <ul>
+                <li>key - movie<ul>
+                        <li>key - title</li>
+                        <li>key - YouTubeID</li>
+                        <li>key - associatedChatroom</li>
+                </ul>
+                </li>
+            </ul>
+        </li>
+
+        <li><p>Chatrooms </p>
+            <ul>
+                <li>key - chatroom<ul>
+                    <li>key - usersinthisRoom<ul>
+                        <li>key - user1<ul>
+                            <li>key - username</li>
+                            <li>key - imageURL</li>
+                            </ul>
+                        </li>
+                        <li>key - user2<ul>
+                            <li>key - username</li>
+                            <li>key - imageURL</li>
+                        </ul>
+                        </li>
+                        </ul>
+                    </li>
+
+
+                    <li>key - record <ul>
+                        <li>key - record1 <ul>
+                            <li>key - username</li>
+                            <li>key - text</li>
+                        </ul>
+                        </li>
+                        <li>key - record2 <ul>
+                            <li>key - username</li>
+                            <li>key - text</li>
+                        </ul>
+                        </li>
+                    </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+        </li>
+
+
+    </ul>
+        <div class = "row"></div>
+
+    <!-- <label>efsertwgtew</label> -->
+        </div>
+
+</div>
+</div>
+
+
+
+
+<!--login modal-->
+<div id="modalLogin" class="modal">
+    <div class="modal-content">
+        <center><a class="waves-effect waves-orange orange btn modal-trigger" style="width:250px;" href="#modalLogin1">Login as User</a></center><br>
+
+        <div class="row "></div>
+
+        <center><a class="waves-effect waves-orange orange btn modal-trigger" style="width:250px;" href="#modalLogin2">Login as Admin</a></center><br>
+
+        <div class="row "></div>
+
+        <center><a href="index.html" class="waves-effect waves-orange orange btn modal-close" style="width:250px;">Return</a></center>
+        <div class="row "></div>
+
+        <!--
+              <li><a href="#modalLogin2" class="modal-trigger"><i class="mdi-action-perm-identity"></i>Login as Admin</a></li> -->
+
+    </div>
+</div>
+
+<div id="modalLogin1" class="modal">
+    <div class="modal-content">
+        <h2 class="center-align">Login as User</h2>
+        <div class="center-align">
+            <div class="divider"></div>
+            <form class="col s12">
+                <div class="row center-align">
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Username</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text ">
+                        <i class="mdi-action-lock-open prefix"></i>
+                        <input id="icon_password" type="password" class="validate">
+                        <label for="icon_password">Password</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <input type="checkbox" class="orange-text" id="filled-in-box" checked="checked">
+                        <label for="filled-in-box">Remember me next time</label>
+                    </div>
+                </div>
+            </form>
+            <div class="divider"></div>
+            <p>
+                <a href="index.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="index.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="modalLogin2" class="modal">
+    <div class="modal-content">
+        <h2 class="center-align">Login as Admin</h2>
+        <div class="center-align">
+            <div class="divider"></div>
+            <form class="col s12">
+                <div class="row center-align">
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <i class="mdi-action-account-circle prefix"></i>
+                        <input id="icon_prefix" type="text" class="validate">
+                        <label for="icon_prefix">Username</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text ">
+                        <i class="mdi-action-lock-open prefix"></i>
+                        <input id="icon_password" type="password" class="validate">
+                        <label for="icon_password">Password</label>
+                    </div>
+                    <div class="input-field col m10 offset-m1 orange-text">
+                        <input type="checkbox" class="orange-text" id="filled-in-box" checked="checked">
+                        <label for="filled-in-box">Remember me next time</label>
+                    </div>
+                </div>
+            </form>
+            <div class="divider"></div>
+            <p>
+                <a href="index.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="admin.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+
+<footer class="page-footer" style="background-color: black; opacity:0.6">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Help Movie Together Grow</h5>
+                <p class="grey-text text-lighten-4">We hope you have enjoyed using Movie Together! If you feel Movie Together has made your life colorful and want to support us, send us over a donation! Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                <button class="btn waves-effect waves-orange orange lighten-3" type="submit" name="action" alt="PayPal - The safer, easier way to pay online!">Donate Now</button>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="www.facebook.com">Facebook</a></li>
+                    <li><a class="grey-text text-lighten-3" href="www.twitter.com">Twitter</a></li>
+                    <li><a class="grey-text text-lighten-3" href="www.google.com">G+</a></li>
+                    <li><a class="grey-text text-lighten-3" href="www.youtube.com">Youtube</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container"><center>
+            © 2016-2017 Sophia Zhou, All rights reserved
+        </center>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

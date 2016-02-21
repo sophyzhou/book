@@ -1,0 +1,181 @@
+
+<html>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/default.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js'></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+
+
+    <script>hljs.initHighlightingOnLoad();</script>
+    <style>
+     iframe {
+        width: 90%;
+        height: 80%;
+     }
+     pre {
+         margin: 20px;
+     }
+     #movie {
+         padding: 20px 15px 30px 40px;
+
+     }
+     #chat {
+         padding: 20px 10px 30px 40px;
+         width: 620px;
+         height:480px;
+         /*overflow: auto;*/
+
+     }
+     #chatContent {
+         height: 200px;
+         width: 340px;
+         overflow: auto;
+     }
+     </style>
+
+
+    <body>
+    <style>
+          html {
+          background: url(img/background.jpg) no-repeat center center fixed;
+              background-color: papayawhip;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+          }
+        </style>
+        <div class="container-full">
+    <nav>
+    <div class="nav-wrapper black">
+      <a href="#!" class="brand-logo center">Movie Together</a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="mockup.html"><i class="material-icons">home</i></a></li>
+        <li><a href="client.html"><i class="material-icons">refresh</i></a></li>
+        <li><a href="about.html"><i class="material-icons">view_module</i></a></li>
+
+      </ul>
+    </div>
+  </nav>
+        </div>
+
+
+        <div class="row">
+            <div class="row">
+
+            <div id="chat" class="col s6">
+                 <!---->
+                <!--<iframe src="https://gitter.im/sophyzhou/movieTogether/~embed"> </iframe>-->
+
+
+                        <div class="card" style="background-color: black;">
+                          <!---->
+                            <!--<div class="card-content white-text center">-->
+                                <!--<span class="card-title">Chatting Area</span>-->
+                            <!--</div>-->
+
+                            <div class="center">
+                                <h6 class="center-align white-text">You are not logged in yet.</h6>
+                                <a onClick="" class="blue waves-effect waves-light btn"><i class="material-icons left">vpn_key</i>Login via GitHub</a>
+                            </div>
+                            <div class = "row"></div>
+
+                            <center><div class="container-full">
+                                <ul class="collection" style="background-color: papayawhip;width:80%;height:50%">
+                                    <li id='chatContent' class="collection-item example-chat-messages" style="background-color: papayawhip"></li>
+                                    <li style="background-color: papayawhip">Sophia is typing...</li>
+                                </ul>
+                            </div></center>
+                            <!--Chatting Area-->
+
+                            <div class="col s12 center">
+                                <div class="example-chat l-demo-container" id="userChatting">
+
+
+                                    <footer class='input-field'>
+                                        <input type='text' id='nameInput' placeholder='Enter a username...' onclick="this.value=''; this.style.color='white'">
+                                    </footer>
+
+                                    <footer class="input-field">
+                                        <input type='text' id='messageInput'  placeholder='Type a message...' onclick="this.value=''; this.style.color='white'">
+                                    </footer>
+
+                                    <!--<footer class="input-field">-->
+                                        <!--<center><a class="waves-effect waves-orange orange btn modal-trigger" style="width:250px;" href="#modalLogin1">Send</a></center><br>-->
+                                    <!--</footer>-->
+
+
+                                </div>
+                            </div>
+
+                </div>
+            </div>
+
+
+
+            <!--<div id="movie" spellcheck=false class="col s6" contenteditable="true">-->
+                 <!--<iframe src="https://www.youtube.com/embed/qTSDL94_Y7M" frameborder="0" allowfullscreen></iframe>-->
+            <!--</div>-->
+                <div id="movie" spellcheck=false class="col s6" contenteditable="true">
+                    <div id="video-placeholder"></div>
+                    </div>
+
+            </div>
+        </div>
+
+                <!-- CHAT JAVACRIPT -->
+                <script>
+                    // CREATE A REFERENCE TO FIREBASE
+                    var messagesRef = new Firebase('https://moviechatroom.firebaseio.com/chatroom/chatMinion');
+
+                    // REGISTER DOM ELEMENTS
+                    var messageField = $('#messageInput');
+                    var nameField = $('#nameInput');
+                    var messageList = $('#chatContent');
+
+                    // LISTEN FOR KEYPRESS EVENT
+                    messageField.keypress(function (e) {
+                        if (e.keyCode == 13) {
+                            //FIELD VALUES
+                            var username = nameField.val();
+                            var message = messageField.val();
+
+                            //SAVE DATA TO FIREBASE AND EMPTY FIELD
+                            messagesRef.push({username:username, text:message});
+                            messageField.val('');
+                        }
+                    });
+
+                    // Add a callback that is triggered for each chat message.
+                    messagesRef.limitToLast(10).on('child_added', function (snapshot) {
+                        //GET DATA
+                        var data = snapshot.val();
+                        var username = data.username || "anonymous";
+                        var message = data.text;
+
+                        //CREATE ELEMENTS MESSAGE & SANITIZE TEXT
+                        var messageElement = $("<li>");
+                        var nameElement = $("<strong class='example-chat-username'></strong>")
+                        nameElement.text(username + ": ");
+                        messageElement.text(message).prepend(nameElement);
+
+                        //ADD MESSAGE
+                        messageList.append(messageElement)
+
+                        //SCROLL TO BOTTOM OF MESSAGE LIST
+                        messageList[0].scrollTop = messageList[0].scrollHeight;
+                    });
+                </script>
+
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="js/iframe.js"></script>
+
+        <script src="js/videoScript.js"></script>
+
+    </body>
+</html>
