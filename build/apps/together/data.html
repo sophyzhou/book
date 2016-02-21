@@ -44,11 +44,6 @@
         font-weight: bold;
 
     }
-    code {
-        border: 1px #ddd solid;
-        font-weight: bold;
-
-    }
     p{
         font-weight: bold;
 
@@ -61,8 +56,8 @@
         <div class="nav-wrapper black">
             <a href="#!" class="brand-logo">Movie Together</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="index.html"><i class="material-icons">home</i></a></li>
-                <li><a href="index.html"><i class="material-icons">refresh</i></a></li>
+                <li><a href="mockup.html"><i class="material-icons">home</i></a></li>
+                <li><a href="data.html"><i class="material-icons">refresh</i></a></li>
                 <li><a href="#modalLogin" class="modal-trigger"><i class="mdi-action-perm-identity"></i></a></li>
                 <li><a href="about.html"><i class="material-icons">view_module</i></a></li>
 
@@ -80,14 +75,14 @@
         <li>Movies</li>
         <li>Chatting Rooms</li>
     </ul>
-    <p>To ackomplish this We could create a data model like below: </p>
+    <p>The data model structure is shown as below: </p>
     <ul>
         <li><p>Users</p>
             <ul>
                 <li>key - user<ul>
-                    <li>key - username</li>
-                    <li>key - email</li>
-                    <li>key - imageURL</li>
+                    <li>username</li>
+                    <li>email</li>
+                    <li>imageURL</li>
                 </ul>
                 </li>
             </ul>
@@ -96,9 +91,10 @@
         <li><p>Movies </p>
             <ul>
                 <li>key - movie<ul>
-                        <li>key - title</li>
-                        <li>key - YouTubeID</li>
-                        <li>key - associatedChatroom</li>
+                        <li>title</li>
+                        <li>YouTubeID</li>
+                        <li>year</li>
+                        <li>review</li>
                 </ul>
                 </li>
             </ul>
@@ -106,37 +102,36 @@
 
         <li><p>Chatrooms </p>
             <ul>
-                <li>key - chatroom<ul>
-                    <li>key - usersinthisRoom<ul>
-                        <li>key - user1<ul>
-                            <li>key - username</li>
-                            <li>key - imageURL</li>
-                            </ul>
-                        </li>
-                        <li>key - user2<ul>
-                            <li>key - username</li>
-                            <li>key - imageURL</li>
-                        </ul>
-                        </li>
+                <li>key - users<ul>
+                    <li>totalCount</li>
+                    <li>key - user1<ul>
+                        <li>username</li>
+                        <li>imageURL</li>
                         </ul>
                     </li>
+                    <li>key - user2<ul>
+                        <li>username</li>
+                        <li>imageURL</li>
+                    </ul>
+                    </li>
+                    </ul>
+                </li>
 
 
-                    <li>key - record <ul>
-                        <li>key - record1 <ul>
-                            <li>key - username</li>
-                            <li>key - text</li>
-                        </ul>
-                        </li>
-                        <li>key - record2 <ul>
-                            <li>key - username</li>
-                            <li>key - text</li>
-                        </ul>
-                        </li>
+                <li>key - record <ul>
+                    <li>key - record1 <ul>
+                        <li>username</li>
+                        <li>text</li>
+                    </ul>
+                    </li>
+                    <li>key - record2 <ul>
+                        <li>username</li>
+                        <li>text</li>
                     </ul>
                     </li>
                 </ul>
                 </li>
+
             </ul>
         </li>
 
@@ -144,8 +139,21 @@
     </ul>
         <div class = "row"></div>
 
+
     <!-- <label>efsertwgtew</label> -->
         </div>
+
+    <div>
+        <h1>Revise</h1>
+        <div class = "container-full" style ="background-color: antiquewhite;opacity:0.7">
+        <ul>
+        <li>The client screen should fit in an iPad screen (768 x 1024). A user should not need to scroll.The users could scroll in the chatting box to view previous chatting history. </li>
+        <li>The client should be able to have awareness of what every other user is doing concurrently.
+        The client could see who is typing right now. The client can also see other clients status (like enter the chat room, leave the chat room) in the message box below the chatting box.</li>
+            <li><a href="client.html">Check it right now!</a></li>
+        </ul>
+        </div>
+    </div>
 
 </div>
 </div>
@@ -164,7 +172,7 @@
 
         <div class="row "></div>
 
-        <center><a href="index.html" class="waves-effect waves-orange orange btn modal-close" style="width:250px;">Return</a></center>
+        <center><a href="mockup.html" class="waves-effect waves-orange orange btn modal-close" style="width:250px;">Return</a></center>
         <div class="row "></div>
 
         <!--
@@ -198,8 +206,8 @@
             </form>
             <div class="divider"></div>
             <p>
-                <a href="index.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
-                <a href="index.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
+                <a href="mockup.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="mockup.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
             </p>
         </div>
     </div>
@@ -230,7 +238,7 @@
             </form>
             <div class="divider"></div>
             <p>
-                <a href="index.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
+                <a href="mockup.html" class="btn btn-flat white modal-close">Cancel</a> &nbsp;
                 <a href="admin.html" class="waves-effect waves-orange orange btn btn-flat modal-action modal-close">Login</a>
             </p>
         </div>
@@ -251,10 +259,10 @@
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Connect</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="www.facebook.com">Facebook</a></li>
-                    <li><a class="grey-text text-lighten-3" href="www.twitter.com">Twitter</a></li>
-                    <li><a class="grey-text text-lighten-3" href="www.google.com">G+</a></li>
-                    <li><a class="grey-text text-lighten-3" href="www.youtube.com">Youtube</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://www.facebook.com">Facebook</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://www.twitter.com">Twitter</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://www.google.com">G+</a></li>
+                    <li><a class="grey-text text-lighten-3" href="http://www.youtube.com">Youtube</a></li>
                 </ul>
             </div>
         </div>
