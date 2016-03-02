@@ -1,5 +1,5 @@
 {
-  "firebase": "ucdd2-book",
+  "firebase": "prolanner",
   "public": "build",
   "ignore": [
     "firebase.json",
