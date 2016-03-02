@@ -1,23 +1,50 @@
 ---
 layout: layout.hbs
 ---
-
 # Specification
 
 # Data
 
 Our app uses the following structure for the database backend:
 
-* foo
-  * bar
-    * ss
-    * xx
-  * messages
+* ```users```
+  * username
+    * displayName
+    * id
+    * status
+    * projects: [projectName]
 
+* ```projects```
+  * projectName
+    * taskIDs: [taskID]
+    * eventIDs: [eventID]
+    * members: [username]
+    * chatroom: chatroomID
+    
+* ```tasks```
+  * taskID
+    * taskName
+    * taskDescription
+    * priority
+    * taskStatus
+    * assignedTo: [username]
+    * deadline
+
+* ```events```
+  * eventID
+    * eventName
+    * eventDate
+    * location
+
+* ```chatroom```
+  * chatroomID
+    * messageID
+      * username
+      * messageContent
 # Actions
 
 The major actions of our app are:
-* (TODO: action name)
+* 
 * (TODO: action name)
 * (TODO: action name)
 * (TODO: action name)
@@ -91,3 +118,8 @@ foo.bar.messages should be
   '-cadsacf': 'b'
 }
 ```
+
+
+
+
+
