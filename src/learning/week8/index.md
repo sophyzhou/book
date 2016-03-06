@@ -37,9 +37,9 @@ previous Uber app can be a good skeleton code to build upon.
   * [x] Design the Firebase database structure
   * [x] Write the actions / state transformation specification  
 * __Milestone (2)__  
-  * [ ] Develop the basic functions of the user simulator
-    * [ ] Simulate user login / logout
-    * [ ] Simulate multiple users    
+  * [x] Develop the basic functions of the user simulator
+    * [x] Simulate user login / logout
+    * [x] Simulate multiple users    
 * __Milestone (3)__  
   * [ ] Complete the user simulator
     * [ ] Simulate all the major actions specific to your application
