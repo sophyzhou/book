@@ -37,10 +37,18 @@ Our app uses the following structure for the database backend:
     * location
 
 * `chatroom`
-  * chatroomID
-    * messageID
-      * username
-      * messageContent
+  * room-messages
+    * roomID
+      * messageID
+  * room-metadata
+    * roomID
+      * createdAt
+      * createdByUserId
+      * id
+      * name
+      * type
+  * users
+    * userID
 
 
 
