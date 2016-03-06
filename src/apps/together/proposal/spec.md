@@ -40,6 +40,11 @@ Our app uses the following structure for the database backend:
   * room-messages
     * roomID
       * messageID
+        * message
+        * name
+        * timestamp
+        * type
+        * userId
   * room-metadata
     * roomID
       * createdAt
@@ -49,7 +54,6 @@ Our app uses the following structure for the database backend:
       * type
   * users
     * userID
-
 
 
 # Actions
