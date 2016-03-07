@@ -1,3 +1,122 @@
-TODO:
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<div>Links to the pages of your team's app's mockup</div>
+    <title>Prolanner</title>
+
+    <style>
+      strong {
+        color: #006064;
+      }
+    </style>
+  </head>  
+
+  <body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    
+    <header class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper cyan darken-3">
+          <ul id="nav-mobile" class="left">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <a href="index.html" class="brand-logo center">Prolanner</a>
+          <ul id="nav-mobile" class="right">
+            <li><a href="/apps/together/proposal/spec.html">Specifications</a></li>
+            <li><a href="/apps/together/proposal/bdd.html">BDD</a></li>
+            <li><a href="/apps/together/proposal/">Proposal</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="parallax-container">
+      <div class="parallax"><img src="img/plan.jpg"></div>
+    </div>
+
+    <div class="section white" id="about">
+      <div class="row container center">
+        <h3> Working on a Project? </h3>
+        <p>Prolanner is a realtime <strong>collaboration tool for teams</strong> anywhere from two to forty people. <br> Users can quickly add and edit tasks, schedule team events, and communicate in real time to quickly <strong>manage and complete a project</strong>. </p>
+        <h1></h1>
+        <!-- Promo Content -->
+        <div class="col s4">
+          <div class="center">
+            <i class="medium material-icons cyan-text">query_builder</i>
+            <h4>Real Time</h4>
+            <p class="light center">Chat with collaborators and assign tasks in real time.</p>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="center">
+            <i class="medium material-icons cyan-text">supervisor_account</i>
+            <h4>Collaborative</h4>
+            <p class="light center">Work with dynamic teams of any size. As long as you're all online, you can share ideas with groups of up to 40 people.</p>
+          </div>
+        </div>
+        <div class="col s4">
+          <div class="center">
+            <i class="medium material-icons cyan-text">web</i>
+            <h4>Visual</h4>
+            <p class="light center">Watch your to-do list shrink as team members complete tasks.</p>
+          </div>
+        </div>
+      </div>      
+    </div>
+
+    <div class="parallax-container">
+      <div class="parallax"><img src="img/plan2.jpg"></div>
+    </div>
+
+    <div class="section" id="faq">
+      <div class="row container center">
+        <h3>Frequently Asked Questions</h3>
+        <ul class="collapsible popout" data-collapsible="accordion">
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">info_outline</i>What collaborative activity can people do together using your app?</div>
+            <div class="collapsible-body"><p>Prolanner allows people to effectively collaborate on projects by creating and assigning tasks, scheduling project meetings, and commnicating through chat.</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">supervisor_account</i>What is the ideal number of concurrent users?</div>
+            <div class="collapsible-body"><p>Depending on the size of the project, anywhere from 10 to 25 users is ideal.</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">stars</i>What skills do people need in order to do this activity?</div>
+            <div class="collapsible-body"><p>No skills necessary, except a passion for project planning and basic computer skills! And a desire to get along with your teammates.</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">thumb_up</i>Is this activity for fun or for something practical?</div>
+            <div class="collapsible-body"><p>Project planning tends to be practical, but it can be fun as well thanks to our app!</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">visibility</i>How can a person see what everyone else is doing?</div>
+            <div class="collapsible-body"><p>All team members can see tasks added in real time, but tasks that show up on an individual's page can be filtered based on assignment and due date.</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">launch</i>How can a person see the most recent result of everyone’s collaborative effort?</div>
+            <div class="collapsible-body"><p>The newest tasks appear at the top of the tasks queue by default, and can be sorted by due date, assignment, and priority.</p></div>
+          </li>
+          <li class="grey lighten-3">
+            <div class="collapsible-header cyan darken-3 white-text"><i class="material-icons">lock_outline</i>What can an admin see?</div>
+            <div class="collapsible-body"><p>An admin is the project creator and can see all users affiliated with a particular project, add and remove users, and view / filter tasks for every user.</p></div>
+          </li> 
+        </ul>
+      </div>      
+    </div>
+    
+  </body>
+
+  <script>
+    $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+  </script>
+</html>
