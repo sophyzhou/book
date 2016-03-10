@@ -6,6 +6,7 @@
 
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
@@ -17,11 +18,10 @@
     <script src="../lib/react.js"></script>
     <script src="../lib/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>    
 
-
-    
 </head>
+
 <body>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
@@ -33,7 +33,24 @@
     MyComponents = {}
   </script>
 
+  <!-- Import Your Components Below -->
   <script type="text/babel" src="components/navbar.jsx"></script>
+
+
+  <!-- In order to avoid merge conflicts in data.jsx, I'm just rendering components as you would in data.jsx -->
+  <script type="text/babel">
+    ReactDOM.render(
+      <MyComponents.NavBar/>,
+      $('#navbar').get(0)
+    );
+    
+  </script>
+
+
+  <!-- Component Divs -->
+  <div id="navbar"></div>
+  <div id="projects"></div>
+  <div id="footer"></div>
 
 </body>
 </html>

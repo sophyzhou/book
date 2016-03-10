@@ -3,7 +3,7 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper cyan darken-3">
-          <ul id="nav-mobile" className="left">
+          <ul className="left">
             <li><a href="/">Home</a></li>
           </ul>
           <a href="index.html" className="brand-logo center">Prolanner</a>
@@ -15,3 +15,4 @@ class NavBar extends React.Component {
     );
   }
 }
+MyComponents.NavBar = NavBar
