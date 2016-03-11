@@ -18,7 +18,9 @@
     <script src="../lib/react.js"></script>
     <script src="../lib/react-dom.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/chatroom.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 </head>
 
@@ -35,6 +37,7 @@
 
   <!-- Import Your Components Below -->
   <script type="text/babel" src="components/navbar.jsx"></script>
+  <script type="text/babel" src="components/chatroom.jsx"></script>
 
 
   <!-- In order to avoid merge conflicts in data.jsx, I'm just rendering components as you would in data.jsx -->
@@ -43,9 +46,33 @@
       <MyComponents.NavBar/>,
       $('#navbar').get(0)
     );
-
+  </script>
+  <script type="text/babel">
+    ReactDOM.render(
+    <MyComponents.ChatRoom/>,
+      $('#chat').get(0)
+    );
   </script>
 
+  <script>
+      var searchFilter = {
+          options: { valueNames: ['name'] },
+          init: function() {
+              var userList = new List('people-list', this.options);
+              var noItems = $('<li id="no-items-found">No items found</li>');
+
+              userList.on('updated', function(list) {
+                  if (list.matchingItems.length === 0) {
+                      $(list.list).append(noItems);
+                  } else {
+                      noItems.detach();
+                  }
+              });
+          }
+      };
+
+      searchFilter.init();
+  </script>
 
   <!-- Component Divs -->
   <div id="navbar"></div>
