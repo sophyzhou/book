@@ -1,7 +1,21 @@
 var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
-var user = {
-    userID: 'github:11863763'
+//var fireChat = new Firechat('https://prolanner.firebaseio.com/chat')
+
+var actions = {}
+actions.sendMessage = function(roomID, messageContent) {
+    firechat.sendMessage(roomId, messageContent, messageType='default', function(){})
 }
+
+
+var user = {
+    userID: 'github:11863763',
+    name: 'peizhe'
+}
+
+//fireChat.setUser(user.userID, 'peizhe', function(user) {
+//    chat.resumeSession();
+//});
+
 var chatRoomID = '-KCXbd_aMWUBCvc6GPQj';
 var chatRoomName = "";
 
@@ -22,7 +36,8 @@ function render_chatroom() {
         <MyComponents.ChatRoom
             messages={messages}
             chatRoomName = {chatRoomName}
-            user = {user}/>,
+            user = {user}
+            actions = {actions}/>,
         $('#chat').get(0)
     );
 }

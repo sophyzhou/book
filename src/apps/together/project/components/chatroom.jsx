@@ -28,12 +28,21 @@ console.log("TIMESTAMP\n")
 console.log(Firebase.ServerValue.TIMESTAMP)
 var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
 chatRef.child('room-messages').child('-KCXbd_aMWUBCvc6GPQj').child('-KCXbedLWG0Fhhykf8aw').update({timestamp:Firebase.ServerValue.TIMESTAMP})
+var messageToSend = "";
 
 class ChatRoom extends React.Component {
+
+    onChange(e) {
+        messageToSend = e.target.value;
+    }
+
+    buttonclick(e) {
+        console.log(messageToSend);
+    }
     render() {
         var messages = this.props.messages;
         var user = this.props.user;
-        var chatRoomName = this.props.ChatRoomName;
+        var chatRoomName = this.props.chatRoomName;
         //console.log(this.props.messages)
         return (
         <div className="container clearfix">
@@ -46,9 +55,9 @@ class ChatRoom extends React.Component {
                 </div>
                 <ul className="list">
                     <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+                        <img src="https://avatars3.githubusercontent.com/u/11863763" alt="avatar" />
                         <div className="about">
-                            <div className="name">Vincent Porter</div>
+                            <div className="name">{user.name}</div>
                             <div className="status">
                                 <i className="fa fa-circle online"></i> online
                             </div>
@@ -65,86 +74,16 @@ class ChatRoom extends React.Component {
                         </div>
                     </li>
 
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_03.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Mike Thomas</div>
-                            <div className="status">
-                                <i className="fa fa-circle online"></i> online
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_04.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Erica Hughes</div>
-                            <div className="status">
-                                <i className="fa fa-circle online"></i> online
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_05.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Ginger Johnston</div>
-                            <div className="status">
-                                <i className="fa fa-circle online"></i> online
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_06.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Tracy Carpenter</div>
-                            <div className="status">
-                                <i className="fa fa-circle offline"></i> left 30 mins ago
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_07.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Christian Kelly</div>
-                            <div className="status">
-                                <i className="fa fa-circle offline"></i> left 10 hours ago
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_08.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Monica Ward</div>
-                            <div className="status">
-                                <i className="fa fa-circle online"></i> online
-                            </div>
-                        </div>
-                    </li>
-
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_09.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Dean Henry</div>
-                            <div className="status">
-                                <i className="fa fa-circle offline"></i> offline since Oct 28
-                            </div>
-                        </div>
-                    </li>
-
                 </ul>
             </div>
 
             <div className="chat">
                 <div className="chat-header clearfix">
-                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01_green.jpg" alt="avatar" />
+                    <img src="https://avatars3.githubusercontent.com/u/11863763" alt="avatar" />
 
                     <div className="chat-about">
-                        <div className="chat-with">Chat with Vincent Porter</div>
-                        <div className="chat-num-messages">already 1 902 messages</div>
+                        <div className="chat-with">ChatRoom: {chatRoomName}</div>
+                        <div className="chat-num-messages">already {Object.keys(messages).length} messages</div>
                     </div>
                     <i className="fa fa-star"></i>
                 </div>
@@ -189,12 +128,12 @@ class ChatRoom extends React.Component {
                 </div>
 
                 <div className="chat-message clearfix">
-                    <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3"></textarea>
+                    <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" onChange={this.handleChange}></textarea>
 
                     <i className="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                     <i className="fa fa-file-image-o"></i>
 
-                    <button>Send</button>
+                    <button onclick={this.buttonclick}>Send</button>
 
                 </div>
 
@@ -204,4 +143,5 @@ class ChatRoom extends React.Component {
     );
     }
 }
+
 MyComponents.ChatRoom = ChatRoom
