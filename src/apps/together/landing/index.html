@@ -23,6 +23,7 @@
 </head>
 
 <body>
+<div id="app-container" class="container"></div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
@@ -35,6 +36,13 @@
 
   <!-- Import Your Components Below -->
   <script type="text/babel" src="components/navbar.jsx"></script>
+  <script type="text/babel" src="components/projview.jsx"></script>
+
+     <!-- Main app container  -->
+     <script type="text/babel" src="components/app.jsx"></script>
+
+    <!--    Connect the app and data -->
+     <script type="text/babel" src="data.jsx"></script>
 
 
   <!-- In order to avoid merge conflicts in data.jsx, I'm just rendering components as you would in data.jsx -->

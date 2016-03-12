@@ -154,11 +154,48 @@ function editTask(taskID, taskObject) {
 
 function addProject(projectObject){
     var newProjectRef = prolannerRef.child('projects').push()
+    var userRef = prolannerRef.child('users').child(projectObject.members[0])
+    
     newProjectRef.set(projectObject)
+
+    userRef.once("value", function(snapshot) {
+      if(snapshot.child("projectIDs").exists()==false) {
+        var proj = [newProjectRef.key()]
+        userRef.child("projectIDs").set(proj)
+        console.log(projectObject.members[0]+": (new) "+proj)
+      }
+      else {
+        var proj = snapshot.child('projectIDs').val()
+        proj.push(newProjectRef.key())
+        userRef.child("projectIDs").set(proj)
+        console.log("New Proj:"+typeof(proj))
+      }
+    });
 }
 
 function deleteProject(projectID){
-    prolannerRef.child('projects').child(projectID).remove()
+    console.log("Deleted proj: "+projectID)
+    var projRef = prolannerRef.child('projects').child(projectID)
+    projRef.once("value", function(snapshot) {
+      console.log("members:"+snapshot.child('members').val()[0])
+      // d === false (because there is no "name/middle" child in the data snapshot)
+      var userRef = prolannerRef.child('users').child(snapshot.child('members').val()[0])
+      var projIDref = userRef.child('projectIDs')
+      projIDref.once("value", function(snapshot){
+        for(var i in snapshot.val()) {
+            console.log("sn:"+snapshot.val()[i]+"projid:"+projectID)
+            if (snapshot.val()[i] == projectID) {
+                console.log("Key:"+snapshot.val()[i].key())
+                //snapshot.val()[i].remove()
+                projIDref.child(Object.keys(snapshot.val())[i]).remove();
+            }
+        }
+      });
+    });
+
+    setTimeout(function () {
+            prolannerRef.child('projects').child(projectID).remove();
+        }, 500)
 }
 
 function editProject(projectID, projectObject){
