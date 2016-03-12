@@ -1,16 +1,43 @@
+
+function timeConverter(timestamp){
+    //var a = new Date(timestamp * 1000);
+    //var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    //var year = a.getFullYear();
+    //var month = months[a.getMonth()];
+    //var date = a.getDate();
+    //var hour = a.getHours();
+    //var min = a.getMinutes();
+    //var sec = a.getSeconds();
+    //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+    //return time;
+    var date = (timestamp) ? new Date(timestamp) : new Date(),
+        month = date.getMonth() + 1,
+        day = date.getDate() ,
+        year = date.getUTCFullYear(),
+        hours = date.getHours() || 12,
+        minutes = '' + date.getMinutes(),
+        ampm = (date.getHours() >= 12) ? 'pm' : 'am';
+
+    hours = (hours > 12) ? hours - 12 : hours;
+    minutes = (minutes.length < 2) ? '0' + minutes : minutes;
+    return month + '/' + day + ' ' + hours + ':' + minutes + ampm;
+}
+
+
+console.log("TIMESTAMP\n")
+console.log(Firebase.ServerValue.TIMESTAMP)
+var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
+chatRef.child('room-messages').child('-KCXbd_aMWUBCvc6GPQj').child('-KCXbedLWG0Fhhykf8aw').update({timestamp:Firebase.ServerValue.TIMESTAMP})
+
 class ChatRoom extends React.Component {
     render() {
-        //user = this.props.user
-        var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
-        var userID = 'github:11863763';
-        var chatRoomID = '-KCXbd_aMWUBCvc6GPQj';
-        var messageRef = chatRef.child(userID);
-        var userRef = chatRef.child();
-        var chatRoomName = '';
-
-
+        var messages = this.props.messages;
+        var user = this.props.user;
+        var chatRoomName = this.props.ChatRoomName;
+        //console.log(this.props.messages)
         return (
         <div className="container clearfix">
+
             <div className="people-list" id="people-list">
                 <div className="search">
                     <span>
@@ -124,58 +151,39 @@ class ChatRoom extends React.Component {
 
                 <div className="chat-history">
                     <ul>
-                        <li className="clearfix">
-                            <div className="message-data align-right">
-                                <span className="message-data-time" >10:10 AM, Today</span> &nbsp; &nbsp;
-                                <span className="message-data-name" >Olia</span> <i className="fa fa-circle me"></i>
+                        {
+                            Object.keys(messages).map(function(messageKey) {
+                                var message = messages[messageKey];
+                                console.log(message['userId'])
+                                if (message['userId'] != user.userID) {
+                                    return (
+                                        <li>
+                                            <div className="message-data">
+                                                <span className="message-data-name"><i
+                                                    className="fa fa-circle online"></i>{message.name}</span>
+                                                <span className="message-data-time">{timeConverter(message.timestamp)}</span>
+                                            </div>
+                                            <div className="message other-message">
+                                                {message.message}
+                                            </div>
+                                        </li>
+                                    )
+                                } else {
+                                    return (
+                                        <li className="clearfix">
+                                            <div className="message-data align-right">
+                                                <span className="message-data-time" >{timeConverter(message.timestamp)}</span> &nbsp; &nbsp;
+                                                <span className="message-data-name" >{message.name}</span> <i className="fa fa-circle me"></i>
 
-                            </div>
-                            <div className="message other-message float-right">
-                                Hi Vincent, how are you? How is the project coming along?
-                            </div>
-                        </li>
-
-                        <li>
-                            <div className="message-data">
-                                <span className="message-data-name"><i className="fa fa-circle online"></i> Vincent</span>
-                                <span className="message-data-time">10:12 AM, Today</span>
-                            </div>
-                            <div className="message my-message">
-                                Are we meeting today? Project has been already finished and I have results to show you.
-                            </div>
-                        </li>
-
-                        <li className="clearfix">
-                            <div className="message-data align-right">
-                                <span className="message-data-time" >10:14 AM, Today</span> &nbsp; &nbsp;
-                                <span className="message-data-name" >Olia</span> <i className="fa fa-circle me"></i>
-
-                            </div>
-                            <div className="message other-message float-right">
-                                Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so? Have you faced any problems at the last phase of the project?
-                            </div>
-                        </li>
-
-                        <li>
-                            <div className="message-data">
-                                <span className="message-data-name"><i className="fa fa-circle online"></i> Vincent</span>
-                                <span className="message-data-time">10:20 AM, Today</span>
-                            </div>
-                            <div className="message my-message">
-                                Actually everything was fine. I'm very excited to show this to our team.
-                            </div>
-                        </li>
-
-                        <li>
-                            <div className="message-data">
-                                <span className="message-data-name"><i className="fa fa-circle online"></i> Vincent</span>
-                                <span className="message-data-time">10:31 AM, Today</span>
-                            </div>
-                            <i className="fa fa-circle online"></i>
-                            <i className="fa fa-circle online" style={{color: "#AED2A6"}}></i>
-                            <i className="fa fa-circle online" style={{color: "#DAE9DA"}}></i>
-                        </li>
-
+                                            </div>
+                                            <div className="message my-message float-right">
+                                                {message.message}
+                                            </div>
+                                        </li>
+                                    )
+                                }
+                            })
+                        }
                     </ul>
 
                 </div>
