@@ -14,6 +14,7 @@ var actions = {
 function render(){
   ReactDOM.render(
     <MyComponents.NavBar
+        data={data}
         actions={actions}/>,
     $('#navbar').get(0)
   )
@@ -27,6 +28,7 @@ var firebaseRef = new Firebase('https://prolanner.firebaseio.com')
 
 // Real-time Data (load constantly on changes)
 firebaseRef.once('value', function(snapshot){
+  data.projects= _.values(snapshot.val().projects)
   render()
 })
 
@@ -54,14 +56,15 @@ actions.login = function(){
 
       var userRef = firebaseRef.child('users')
       var isUserPresent;
+      var gid = "github:"+authData.github.id
 
       console.log("UN:"+user.username)
       userRef.once('value', function(snapshot){
-        console.log("ssdfs:"+snapshot.child(user.username).exists())
-        if(snapshot.child(user.username).exists()==true) {
+        console.log("exists:"+snapshot.child(gid).exists())
+        if(snapshot.child(gid).exists()==true) {
           isUserPresent = true
-          var uref = firebaseRef.child("users").child(user.username)
-          firebaseRef.child("users").child(user.username).update({status:"online"});
+          var uref = firebaseRef.child("users").child(gid)
+          firebaseRef.child("users").child(gid).update({status:"online"});
           uref.on('value', function(snapshot){
             data.user = snapshot.val()
             console.log("bajksd:"+snapshot.val())
@@ -80,14 +83,16 @@ actions.login = function(){
         }
         else {
           isUserPresent = false
-          var uref = firebaseRef.child("users").child(user.username)
+          data.projects=[]
+          var uref = firebaseRef.child("users").child(gid)
+          uref.set(user)
           uref.on('value', function(snapshot){
             data.user = snapshot.val()
             render()
           })
 
           // set the user data
-          uref.set(user)
+          //uref.set(user)
         }
       })
     }
@@ -103,9 +108,10 @@ actions.logout = function(){
     actions.logged = false
     firebaseRef.unauth()
 
+    var gid = "github:"+data.user.id
     var userRef = firebaseRef
       .child('users')
-      .child(data.user.username)
+      .child(gid)
 
     // unsubscribe to the user data
     userRef.off()
