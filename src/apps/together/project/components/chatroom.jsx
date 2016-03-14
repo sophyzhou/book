@@ -52,7 +52,7 @@ class ChatRoom extends React.Component {
                 <ul className="list">
                     {
                         Object.keys(members).map(function (githubID) {
-                            var displayName = members[githubID]['displayName']
+                            var displayName = members[githubID]['displayName'].split(" ")[0]
                             var status = members[githubID]['status']
                             return(
                                 <li className="clearfix">
