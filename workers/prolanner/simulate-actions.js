@@ -20,7 +20,7 @@ function simulate(){
     login(randUser)
 
     // Random Projects
-    if (casual.integer(0, 6) > 0) {
+    if (casual.integer(0, 15) > 13) {
     addProject({
             projectMetaData: {
                 projectName: casual.title,
@@ -30,17 +30,14 @@ function simulate(){
                 projectID: "",
                 relatedChatRoom: ""
             },
-            taskIDs: [''],
-            eventIDs: ['']
     })}
-
 
     var randProjectID;
     prolannerRef.child('projects').once('value', function (snapshot) {
         var projectIDs = Object.keys(snapshot.val());
         randProjectID = projectIDs[Math.floor(Math.random() * projectIDs.length)];
 
-        if (casual.integer(0, 6) > 0) {
+        if (casual.integer(0, 15) > 12) {
             addEvent(randProjectID, {
                 eventName: casual.title,
                 eventDate: casual.date(format = "MM/DD/YYYY"),
@@ -48,7 +45,7 @@ function simulate(){
             })
         }
 
-        if (casual.integer(0, 6) > 0) {
+        if (casual.integer(0, 15) > 12) {
             addTask(randProjectID, {
                 taskName: casual.title,
                 taskDescription: casual.short_description,
@@ -69,8 +66,17 @@ function simulate(){
             )
         }, 1000)
 
+        if (casual.integer(0,100) > 0)
+        {
+            var roomID;
+            prolannerRef.child('projects').child(randProjectID).child('projectMetaData').once('value', function(snapshot) {
+                roomID = snapshot.val().relatedChatRoom
+                sendMessage(roomID, randUser)
+            })
+        }
+
         var eventIDs;
-        prolannerRef.child('events').once('value', function (snapshot) {
+        prolannerRef.child('events').child(randProjectID).once('value', function (snapshot) {
             eventIDs = Object.keys(snapshot.val());
             setTimeout(function() {
                 randEventID = eventIDs[Math.floor(Math.random() * eventIDs.length)]
@@ -81,14 +87,16 @@ function simulate(){
                     location: ''})
 
                 setTimeout(function() {
-                    deleteEvent(randProjectID, randEventID);
+                    if (casual.integer(0, 15) > 13) {
+                        deleteEvent(randProjectID, randEventID);
+                    }
                 }, 6000)
 
             }, 1000)
         });
 
         var taskIDs;
-        prolannerRef.child('tasks').once('value', function (snapshot) {
+        prolannerRef.child('tasks').child(randProjectID).once('value', function (snapshot) {
             taskIDs = Object.keys(snapshot.val());
             setTimeout(function() {
                 randTaskID = taskIDs[Math.floor(Math.random() * taskIDs.length)]
@@ -103,7 +111,9 @@ function simulate(){
                 })
 
                 setTimeout(function () {
-                    deleteTask(randProjectID, randTaskID);
+                    if (casual.integer(0, 15) > 13) {
+                        deleteTask(randProjectID, randTaskID);
+                    }
                 }, 5000)
 
             }, 1000)
@@ -114,8 +124,10 @@ function simulate(){
 
 
     setTimeout(function() {
-        deleteProject(randProjectID);
-    },  7000);
+        if (casual.integer(0, 15) > 13) {
+            deleteProject(randProjectID);
+        }
+    },  8000);
 
     // simulate this person leaving after 'duration' seconds
     setTimeout(function () {
@@ -141,16 +153,19 @@ function logout(userID) {
 // add / edit / delete
 
 function addTask(projectID, taskObject) {
+    console.log('Add a task in project ' + projectID)
     var taskRef = prolannerRef.child('tasks').child(projectID).push();
     taskRef.set(taskObject)
 }
 
 function deleteTask(projectID, taskID) {
+    console.log('Delete task ' + taskID + ' in project ' + projectID);
     var taskRef = prolannerRef.child('tasks').child(projectID).child(taskID)
     taskRef.remove();
 }
 
 function editTask(projectID, taskID, taskObject) {
+    console.log('Edit task ' + taskID + ' in project ' + projectID);
     var taskRef = prolannerRef.child('tasks').child(projectID).child(taskID)
     taskRef.update(taskObject)
 }
@@ -175,10 +190,11 @@ function addProject(projectObject){
     projectObject.projectMetaData.projectID = newProjectRef.key();
 
     newProjectRef.set(projectObject)
+    console.log('Add project ' + newProjectRef.key())
 }
 
 function deleteProject(projectID){
-    //console.log("Deleted proj: "+projectID)
+    console.log("Delete project " + projectID)
     var roomID = "";
     var projRef = prolannerRef.child('projects').child(projectID)
     projRef.child('projectMetaData').once("value", function(snapshot) {
@@ -199,11 +215,14 @@ function deleteProject(projectID){
     setTimeout(function () {
         if (roomID != "") {
             prolannerRef.child('projects').child(projectID).remove();
+            prolannerRef.child('tasks').child(projectID).remove();
+            prolannerRef.child('events').child(projectID).remove();
             prolannerRef.child('chatrooms').child(roomID).remove();}
         }, 500)
 }
 
 function editProject(projectID, projectObject){
+    console.log('Eidt project ' + projectID)
     var ProjectRef = prolannerRef.child('projects').child(projectID)
     ProjectRef.child('projectMetaData').update(projectObject.projectMetaData)
 }
@@ -213,17 +232,20 @@ function editProject(projectID, projectObject){
 // add / edit / delete
 
 function addEvent(projectID, eventObject) {
+    console.log('Add an event to project ' + projectID )
     var newEventRef = prolannerRef.child('events').child(projectID).push()
     newEventRef.set(eventObject)
     
 }
 
 function deleteEvent(projectID, eventID) {
+    console.log('Delete event ' + eventID + ' in project ' + projectID);
     var eventRef = prolannerRef.child('events').child(projectID).child(eventID);
     eventRef.remove();
 }
 
 function editEvent(projectID, eventID, eventObject) {
+    console.log('Edit event ' + eventID + 'in project ' + projectID);
     var eventRef = prolannerRef.child('events').child(projectID).child(eventID)
     eventRef.update(eventObject)
 }
@@ -264,6 +286,20 @@ function createChatRoom(userID, projectID, members) {
     return roomRef.key();
 }
 
+function sendMessage(roomID, userID) {
+    var message = casual.sentence
+    console.log('send message ' + message + ' to ' + roomID + ' by ' + userID)
+    newMessageRef = prolannerRef.child('chatrooms').child(roomID).child('roomMessages').push();
+    prolannerRef.child('users').child(userID).once('value', function(snapshot){
+        var displayName = snapshot.val().displayName;
+        newMessageRef.set({
+            content: message,
+            name: displayName,
+            timestamp: Firebase.ServerValue.TIMESTAMP,
+            userID: userID
+        })
+    });
 
+}
 // run each second
 setTimeout(function() {setInterval(simulate, 10000)}, 2000);
