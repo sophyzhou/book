@@ -301,5 +301,4 @@ function sendMessage(roomID, userID) {
     });
 
 }
-// run each second
 setTimeout(function() {setInterval(simulate, 10000)}, 2000);
