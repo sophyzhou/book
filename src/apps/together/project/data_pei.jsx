@@ -1,4 +1,4 @@
-var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
+var chatRef = new Firebase('https://prolanner.firebaseio.com/chatrooms')
 //var fireChat = new Firechat('https://prolanner.firebaseio.com/chat')
 
 var actions = {}
@@ -12,20 +12,33 @@ var user = {
     name: 'peizhe'
 }
 
+var members = {};
+
 //fireChat.setUser(user.userID, 'peizhe', function(user) {
 //    chat.resumeSession();
 //});
 
-var chatRoomID = '-KCXbd_aMWUBCvc6GPQj';
+var roomID = '-KCnKxDpJ67bJSugx0wv';
 var chatRoomName = "";
 
-chatRef.child('room-metadata').child(chatRoomID).once("value", function(snapshot){
-    chatRoomName = snapshot.val().name;
+chatRef.child(roomID).child('roomMetaData').once("value", function(snapshot){
+    chatRoomName = snapshot.val().roomName;
+    var prolannerRef = new Firebase('https://prolanner.firebaseio.com/')
+    snapshot.val().roomMembers.forEach(function(userID) {
+        var userRef = prolannerRef.child('users').child(userID).once('value', function(snapshot){
+            var user = snapshot.val();
+            console.log(user.displayName)
+            members[user.userID] = {}
+            members[user.userID]['displayName'] = user.displayName
+            members[user.userID]['status'] = user.status
+            render_chatroom();
+        })
+    });
     console.log('get chatRoomName ' + chatRoomName);
     render_chatroom();
 });
 var messages={};
-chatRef.child('room-messages').child(chatRoomID).on("value", function(snapshot){
+chatRef.child(roomID).child('roomMessages').on("value", function(snapshot){
     messages = snapshot.val();
     console.log(messages);
     render_chatroom();
@@ -37,6 +50,7 @@ function render_chatroom() {
             messages={messages}
             chatRoomName = {chatRoomName}
             user = {user}
+            members = {members}
             actions = {actions}/>,
         $('#chat').get(0)
     );

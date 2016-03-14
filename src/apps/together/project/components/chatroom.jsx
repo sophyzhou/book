@@ -43,36 +43,31 @@ class ChatRoom extends React.Component {
         var messages = this.props.messages;
         var user = this.props.user;
         var chatRoomName = this.props.chatRoomName;
+        var members = this.props.members;
         //console.log(this.props.messages)
         return (
         <div className="container clearfix">
 
             <div className="people-list" id="people-list">
-                <div className="search">
-                    <span>
-                    <input type="text" placeholder="search" />
-                        </span>
-                </div>
                 <ul className="list">
-                    <li className="clearfix">
-                        <img src="https://avatars3.githubusercontent.com/u/11863763" alt="avatar" />
-                        <div className="about">
-                            <div className="name">{user.name}</div>
-                            <div className="status">
-                                <i className="fa fa-circle online"></i> online
-                            </div>
-                        </div>
-                    </li>
+                    {
+                        Object.keys(members).map(function (githubID) {
+                            var displayName = members[githubID]['displayName']
+                            var status = members[githubID]['status']
+                            return(
+                                <li className="clearfix">
+                                    <img src= {'https://avatars3.githubusercontent.com/u/' + githubID} alt="avatar" />
+                                    <div className="about">
+                                        <div className="name">{displayName}</div>
+                                        <div className="status">
+                                            <i className={"fa fa-circle "+status}></i> {status}
+                                        </div>
+                                    </div>
+                                </li>
+                            )
 
-                    <li className="clearfix">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_02.jpg" alt="avatar" />
-                        <div className="about">
-                            <div className="name">Aiden Chavez</div>
-                            <div className="status">
-                                <i className="fa fa-circle offline"></i> left 7 mins ago
-                            </div>
-                        </div>
-                    </li>
+                        })
+                    }
 
                 </ul>
             </div>
@@ -94,7 +89,7 @@ class ChatRoom extends React.Component {
                             Object.keys(messages).map(function(messageKey) {
                                 var message = messages[messageKey];
                                 console.log(message['userId'])
-                                if (message['userId'] != user.userID) {
+                                if (message['userID'] != user.userID) {
                                     return (
                                         <li>
                                             <div className="message-data">
@@ -103,7 +98,7 @@ class ChatRoom extends React.Component {
                                                 <span className="message-data-time">{timeConverter(message.timestamp)}</span>
                                             </div>
                                             <div className="message other-message">
-                                                {message.message}
+                                                {message.content}
                                             </div>
                                         </li>
                                     )
@@ -116,7 +111,7 @@ class ChatRoom extends React.Component {
 
                                             </div>
                                             <div className="message my-message float-right">
-                                                {message.message}
+                                                {message.content}
                                             </div>
                                         </li>
                                     )

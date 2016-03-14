@@ -12,14 +12,15 @@ body {
 
 .container {
     margin: 0 auto;
-    width: 750px;
+    width: 690px;
     background: #444753;
     border-radius: 5px;
 }
 
 .people-list {
-    width: 260px;
+    width: 200px;
     float: left;
+    overflow-y: auto;
 }
 .people-list .search {
     padding: 20px;
