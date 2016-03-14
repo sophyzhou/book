@@ -51,7 +51,7 @@ actions.login = function(){
       var user = {
         displayName: authData.github.displayName,
         userName: authData.github.username,
-        userId: authData.github.id,
+        userID: authData.github.id,
         status: 'online'
       }
 
