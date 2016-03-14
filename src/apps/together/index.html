@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
-    <!-- Firebase Stuff -->
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-
-    <!-- React & JQuery Stuff -->
-    <script src="lib/react.js"></script>
-    <script src="lib/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>    
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
     <title>Prolanner</title>
 
@@ -33,25 +21,19 @@
   <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-
-    <script>
-      // MyComponents is a global object where each property is a reference to a component class
-      MyComponents = {}
-    </script>
-
-    <!-- Import Your Components Below -->
-    <script type="text/babel" src="components/navbar.jsx"></script>
-
-    <!-- Main app container  -->
-    <script type="text/babel" src="components/app.jsx"></script>
-
-    <!-- Connect the app and data -->
-    <script type="text/babel" src="data.jsx"></script>
-
+    
     <header class="navbar-fixed">
-      <div id="navbar"></div>
+      <nav>
+        <div class="nav-wrapper cyan darken-3">
+          <ul id="nav-mobile" class="left">
+            <li><a href="/apps/together/">Home</a></li>
+          </ul>
+          <a href="index.html" class="brand-logo center">Prolanner</a>
+          <ul id="nav-mobile" class="right">
+            <li><a href="/apps/together/landing/">My Projects</a></li>
+          </ul>
+        </div>
+      </nav>
     </header>
 
     <div class="parallax-container">
@@ -63,7 +45,7 @@
         <h3> Working on a Project? </h3>
         <p>Prolanner is a realtime <strong>collaboration tool for teams</strong> anywhere from two to forty people. <br> Users can quickly add and edit tasks, schedule team events, and communicate in real time to quickly <strong>manage and complete a project</strong>. </p>
         <h1></h1>
-
+        <!-- Promo Content -->
         <div class="col s4">
           <div class="center">
             <i class="medium material-icons cyan-text">query_builder</i>
