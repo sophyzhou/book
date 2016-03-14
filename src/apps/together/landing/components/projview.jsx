@@ -1,12 +1,14 @@
 MyComponents.proj = React.createClass({
   render: function(){
-    var roomID = this.props.proj.projectMetaData.relatedChatRoom
-    var url = "/apps/together/project/#"+roomID
+
+    var projID = this.props.proj.projectMetaData.projectID
+    var url = "/apps/together/project/#"+projID
+    console.log("url: "+url)
     return(
       <div className="col s6">
         <div className="card cyan darken-1">
           <div className="card-content">
-            <span className="card-title white-text"><h4><a href={url}>{this.props.proj.projectMetaData.projectName}</a></h4></span>
+            <a href={url}><span className="card-title white-text"><h4>{this.props.proj.projectMetaData.projectName}</h4></span></a>
           </div>
         </div>
       </div>
