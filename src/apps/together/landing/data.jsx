@@ -109,7 +109,7 @@ actions.logout = function(){
     actions.logged = false
     firebaseRef.unauth()
 
-    var gid = "github:"+data.user.id
+    var gid = "github:"+data.user.userID
     var userRef = firebaseRef
       .child('users')
       .child(gid)
