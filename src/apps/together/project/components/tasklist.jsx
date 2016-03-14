@@ -1,10 +1,11 @@
-MyComponents.tasks = React.createClass({
-  render: function(){
-
+MyComponents.task = React.createClass({
+  render(){
+console.log("inside task")
+    console.log(this.props.task.taskName)
     return(
       <div className="card cyan darken-1">
       <div className="card-content white-text">
-        <span className="card-title">Task Name Here</span>
+        <span className="card-title">{this.props.task.taskName}</span>
       </div>
       </div>
     );
@@ -15,6 +16,14 @@ MyComponents.tasks = React.createClass({
 
 class TaskList extends React.Component {
   render() {
+    var task = this.props.tasks.map(function(u, i){
+      console.log("Inside tasklist")
+      console.log(u)
+      console.log(i)
+      return <MyComponents.task task={u} key={i} />
+    })
+
+
     return (
       <div className="row">
 
@@ -22,7 +31,7 @@ class TaskList extends React.Component {
           <div className="card darken-1">
             <div className="card-content black-text">
               <span className="card-title">Do</span>
-              <MyComponents.tasks/>
+              {task}
             </div>
           </div>
         </div>
@@ -31,7 +40,7 @@ class TaskList extends React.Component {
           <div className="card darken-1">
             <div className="card-content black-text">
               <span className="card-title">Done</span>
-              <MyComponents.tasks/>
+              {task}
             </div>
           </div>
         </div>
