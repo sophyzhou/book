@@ -18,7 +18,7 @@ var members = {};
 //    chat.resumeSession();
 //});
 
-var roomID = '-KCnKxDpJ67bJSugx0wv';
+var roomID = window.location.hash.substring(1);
 var chatRoomName = "";
 
 chatRef.child(roomID).child('roomMetaData').once("value", function(snapshot){

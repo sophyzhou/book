@@ -12,13 +12,13 @@ body {
 
 .container {
     margin: 0 auto;
-    width: 690px;
+    width: 700px;
     background: #444753;
     border-radius: 5px;
 }
 
 .people-list {
-    width: 200px;
+    width: 210px;
     float: left;
     overflow-y: auto;
 }
