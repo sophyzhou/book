@@ -12,6 +12,7 @@ prolannerRef.child('users').once('value', function (snapshot) {
     // console.log(allUserIDs)
     // console.log(selectNUsers(3))
     var randUser = allUserIDs[casual.integer(0,allUserIDs.length-1)]
+    var randUser = "github:9546162"
 // addProject({
 //             projectMetaData: {
 //                 projectName: casual.title,

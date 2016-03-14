@@ -58,7 +58,7 @@ class ChatRoom extends React.Component {
                                 <li className="clearfix">
                                     <img src= {'https://avatars3.githubusercontent.com/u/' + githubID} alt="avatar" />
                                     <div className="about">
-                                        <div className="name">{displayName.slice(0,16)}</div>
+                                        <div className="name">{displayName.split(" ")[0].slice(0,14)}</div>
                                         <div className="status">
                                             <i className={"fa fa-circle "+status}></i> {status}
                                         </div>

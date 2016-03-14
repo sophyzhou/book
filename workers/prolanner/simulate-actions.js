@@ -20,7 +20,7 @@ function simulate(){
     login(randUser)
 
     // Random Projects
-    if (casual.integer(0, 15) > 15) {
+    if (casual.integer(0, 15) > -1) {
     addProject({
             projectMetaData: {
                 projectName: casual.title,
@@ -37,7 +37,7 @@ function simulate(){
         var projectIDs = Object.keys(snapshot.val());
         randProjectID = projectIDs[Math.floor(Math.random() * projectIDs.length)];
 
-        if (casual.integer(0, 15) > 15) {
+        if (casual.integer(0, 15) > -1) {
             addEvent(randProjectID, {
                 eventName: casual.title,
                 eventDate: casual.date(format = "MM/DD/YYYY"),
@@ -45,7 +45,7 @@ function simulate(){
             })
         }
 
-        if (casual.integer(0, 15) > 15) {
+        if (casual.integer(0, 15) > -1) {
             addTask(randProjectID, {
                 taskName: casual.title,
                 taskDescription: casual.short_description,
@@ -75,53 +75,51 @@ function simulate(){
             })
         }
 
-        //var eventIDs;
-        //prolannerRef.child('events').child(randProjectID).once('value', function (snapshot) {
-            //eventIDs = Object.keys(snapshot.val());
-            //setTimeout(function() {
-                //randEventID = eventIDs[Math.floor(Math.random() * eventIDs.length)]
+        var eventIDs;
+        prolannerRef.child('events').child(randProjectID).once('value', function (snapshot) {
+            eventIDs = Object.keys(snapshot.val());
+            setTimeout(function() {
+                randEventID = eventIDs[Math.floor(Math.random() * eventIDs.length)]
 
-                //editEvent(randProjectID, randEventID, {
-                    //eventName: "event" + Math.floor(Math.random() * 10000).toString(),
-                    //eventDate: casual.date(format="MM/DD/YYYY"),
-                    //location: ''})
+                editEvent(randProjectID, randEventID, {
+                    eventName: "event" + Math.floor(Math.random() * 10000).toString(),
+                    eventDate: casual.date(format="MM/DD/YYYY"),
+                    location: ''})
 
-                //setTimeout(function() {
-                    //if (casual.integer(0, 15) > 15) {
-                        //deleteEvent(randProjectID, randEventID);
-                    //}
-                //}, 6000)
+                setTimeout(function() {
+                    if (casual.integer(0, 15) > 15) {
+                        deleteEvent(randProjectID, randEventID);
+                    }
+                }, 6000)
 
-            //}, 1000)
-        //});
+            }, 1000)
+        });
 
-        //var taskIDs;
-        //prolannerRef.child('tasks').child(randProjectID).once('value', function (snapshot) {
-            //taskIDs = Object.keys(snapshot.val());
-            //setTimeout(function() {
-                //randTaskID = taskIDs[Math.floor(Math.random() * taskIDs.length)]
+        var taskIDs;
+        prolannerRef.child('tasks').child(randProjectID).once('value', function (snapshot) {
+            taskIDs = Object.keys(snapshot.val());
+            setTimeout(function() {
+                randTaskID = taskIDs[Math.floor(Math.random() * taskIDs.length)]
 
-                //editTask(randProjectID, randTaskID, {
-                    //taskName : casual.title,
-                    //taskDescription : casual.short_description,
-                    //priority : casual.integer(0,2),
-                    //taskStatus : casual.integer(0,2),
-                    //assignedTo: allUserIDs[Math.floor(Math.random() * allUserIDs.length)],
-                    //deadline : casual.date(format="MM/DD/YYYY")
-                //})
+                editTask(randProjectID, randTaskID, {
+                    taskName : casual.title,
+                    taskDescription : casual.short_description,
+                    priority : casual.integer(0,2),
+                    taskStatus : casual.integer(0,2),
+                    assignedTo: allUserIDs[Math.floor(Math.random() * allUserIDs.length)],
+                    deadline : casual.date(format="MM/DD/YYYY")
+                })
 
-                //setTimeout(function () {
-                    //if (casual.integer(0, 15) > 15) {
-                        //deleteTask(randProjectID, randTaskID);
-                    //}
-                //}, 5000)
+                setTimeout(function () {
+                    if (casual.integer(0, 15) > 15) {
+                        deleteTask(randProjectID, randTaskID);
+                    }
+                }, 5000)
 
-            //}, 1000)
-        //});
+            }, 1000)
+        });
 
     });
-
-
 
     setTimeout(function() {
         if (casual.integer(0, 15) > 15) {
@@ -301,4 +299,4 @@ function sendMessage(roomID, userID) {
     });
 
 }
-setTimeout(function() {setInterval(simulate, 1000)}, 2000);
+setTimeout(function() {setInterval(simulate, 10000)}, 2000);

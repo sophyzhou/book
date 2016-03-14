@@ -1,14 +1,25 @@
 {
+<<<<<<< HEAD
   "name": "book",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+  "name": "uber-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simulate-providers.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node simulate-providers.js"
+>>>>>>> 7b4ca6c45edfa7a3b49f786e2abebad8b29ae57f
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
     "consolidate": "^0.13.1",
     "debug": "^2.2.0",
     "firebase": "^2.4.0",
@@ -26,5 +37,10 @@
     "metalsmith-watch": "^1.0.1",
     "node-random-name": "^1.0.1",
     "nunjucks": "^2.3.0"
+=======
+    "firebase": "^2.4.0",
+    "lodash": "^3.10.1",
+    "node-random-name": "^1.0.1"
+>>>>>>> 7b4ca6c45edfa7a3b49f786e2abebad8b29ae57f
   }
 }
