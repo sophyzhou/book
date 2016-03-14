@@ -50,8 +50,8 @@ actions.login = function(){
       // create a user object based on authData
       var user = {
         displayName: authData.github.displayName,
-        username: authData.github.username,
-        id: authData.github.id,
+        userName: authData.github.username,
+        userId: authData.github.id,
         status: 'online'
       }
 
