@@ -46,6 +46,7 @@
 
   <!-- Import Your Components Below -->
   <script type="text/babel" src="components/navbar.jsx"></script>
+  <script type="text/babel" src="components/tasklist.jsx"></script>
   <script type="text/babel" src="components/chatroom.jsx"></script>
   <script type="text/babel" src="data.jsx"></script>
   <script type="text/babel" src="js/chatroom.js"></script>
@@ -59,37 +60,44 @@
     );
   </script>
 
+  <script type="text/babel">
+    ReactDOM.render(
+      <MyComponents.TaskList/>,
+      $('#tasklist').get(0)
+    );
+  </script>
+
   <script>
-      (function(){
-          var searchFilter = {
-              options: { valueNames: ['name'] },
-              init: function() {
-                  var userList = new List('people-list', this.options);
-                  var noItems = $('<li id="no-items-found">No items found</li>');
+    (function(){
+        var searchFilter = {
+          options: { valueNames: ['name'] },
+          init: function() {
+            var userList = new List('people-list', this.options);
+            var noItems = $('<li id="no-items-found">No items found</li>');
 
-                  userList.on('updated', function(list) {
-                      if (list.matchingItems.length === 0) {
-                          $(list.list).append(noItems);
-                          console.log(noItems)
-                      } else {
-                          noItems.detach();
-                          console.log(list.matchingItems)
-                      }
-                  });
+            userList.on('updated', function(list) {
+              if (list.matchingItems.length === 0) {
+                $(list.list).append(noItems);
+                console.log(noItems)
+              } else {
+                noItems.detach();
+                console.log(list.matchingItems)
               }
-          };
+            });
+          }
+        };
 
-          searchFilter.init();
+        searchFilter.init();
 
-      })();
+    })();
   </script>
 
   <!-- Component Divs -->
   <div id="navbar"></div>
-  <div id="chat"></div>
-  <div id="do"></div>
-  <div id="doing"></div>
-  <div id="done"></div>
-
+  <div class="row">
+    <h1></h1>
+    <div class="col s6" id="chat"></div>
+    <div class="col s6" id="tasklist"></div>
+  </div>
 </body>
 </html>
