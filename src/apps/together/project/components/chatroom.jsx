@@ -88,7 +88,7 @@ class ChatRoom extends React.Component {
                         {
                             Object.keys(messages).map(function(messageKey) {
                                 var message = messages[messageKey];
-                                console.log(message['userId'])
+                                //console.log(message['userId'])
                                 if (message['userID'] != user.userID) {
                                     return (
                                         <li>
