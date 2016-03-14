@@ -1,116 +1,121 @@
-var _ = require('lodash')
-var random_name = require('node-random-name');
+var _ = require('lodash');
+var casual = require('casual');
 var Firebase = require('firebase');
+var localStorage = require('localStorage')
 
 var prolannerRef = new Firebase("https://prolanner.firebaseio.com/")
-var allUsernames;
+var allUserIDs;
 prolannerRef.child('users').once('value', function (snapshot) {
-    allUsernames = Object.keys(snapshot.val());
+    allUserIDs = Object.keys(snapshot.val());
 });
 
 
 // simualate a random person entering, staying for a duration, and leaving
 function simulate(){
     // stuff we need for all simulations
-    var randUser = allUsernames[Math.floor(Math.random() * allUsernames.length)];
-    var duration = 1 + 3 * Math.random()
-
-    var taskNames = ["Complete the authentication module","Create the database","Find all the user stories for the project","Write code for creating the users","Snippet to allow users to add new tasks"]
-    var taskDescription = ["a","b","c","d","e"]
-    var priority = ["Low", "High", "Medium"]
-    var taskStatus = ["To be done", "In Progress", "Done"]
-    var deadline = ["03/05/2016","05/19/2016","05/13/2016","10/13/2016","11/23/2016"]        
+    var randUser = allUserIDs[casual.integer(0,allUserIDs.length-1)]
+    var duration = casual.integer(10, 20)
 
     // simulate this user login to do some operations
     login(randUser)
 
     // Random Projects
+    if (casual.integer(0, 6) > 0) {
     addProject({
-        projectName: "project" + Math.floor(Math.random() * 10000).toString(), 
-        taskIDs: [''], 
-        eventIDs: [''], 
-        members: [randUser], 
-        chatroomID:""})
+            projectMetaData: {
+                projectName: casual.title,
+                createdBy: randUser,
+                createdAt: Firebase.ServerValue.TIMESTAMP,
+                projectMembers: [randUser].concat(selectNUsers(casual.integer(0, 5))),
+                projectID: "",
+                relatedChatRoom: ""
+            },
+            taskIDs: [''],
+            eventIDs: ['']
+    })}
 
-    var projectIDs;
+
+    var randProjectID;
     prolannerRef.child('projects').once('value', function (snapshot) {
-        projectIDs = Object.keys(snapshot.val());
-    });
-
-    setTimeout(function() {
+        var projectIDs = Object.keys(snapshot.val());
         randProjectID = projectIDs[Math.floor(Math.random() * projectIDs.length)];
 
-        editProject(randProjectID, {
-        projectName: "project" + Math.floor(Math.random() * 10000).toString(), 
-        taskIDs: [''], 
-        eventIDs: [''], 
-        members: [randUser], 
-        chatroomID:""})
+        if (casual.integer(0, 6) > 0) {
+            addEvent(randProjectID, {
+                eventName: casual.title,
+                eventDate: casual.date(format = "MM/DD/YYYY"),
+                location: ''
+            })
+        }
+
+        if (casual.integer(0, 6) > 0) {
+            addTask(randProjectID, {
+                taskName: casual.title,
+                taskDescription: casual.short_description,
+                priority: casual.integer(0, 2),
+                taskStatus: casual.integer(0, 2),
+                assignedTo: allUserIDs[Math.floor(Math.random() * allUserIDs.length)],
+                deadline: casual.date(format = "MM/DD/YYYY")
+            })
+        }
 
 
         setTimeout(function() {
-            deleteProject(randProjectID);
-        },  500);
-    }, 1000)
-    
+            editProject(randProjectID, {
+                    projectMetaData: {
+                        projectName: casual.title
+                    },
+                }
+            )
+        }, 1000)
 
+        var eventIDs;
+        prolannerRef.child('events').once('value', function (snapshot) {
+            eventIDs = Object.keys(snapshot.val());
+            setTimeout(function() {
+                randEventID = eventIDs[Math.floor(Math.random() * eventIDs.length)]
 
-    // Random Events
-    addEvent({
-        eventName: "event" + Math.floor(Math.random() * 10000).toString(), 
-        eventDate: deadline[Math.floor(Math.random() * deadline.length)], 
-        location: ''})
+                editEvent(randProjectID, randEventID, {
+                    eventName: "event" + Math.floor(Math.random() * 10000).toString(),
+                    eventDate: casual.date(format="MM/DD/YYYY"),
+                    location: ''})
 
-    var eventIDs;
-    prolannerRef.child('events').once('value', function (snapshot) {
-        eventIDs = Object.keys(snapshot.val());
+                setTimeout(function() {
+                    deleteEvent(randProjectID, randEventID);
+                }, 6000)
+
+            }, 1000)
+        });
+
+        var taskIDs;
+        prolannerRef.child('tasks').once('value', function (snapshot) {
+            taskIDs = Object.keys(snapshot.val());
+            setTimeout(function() {
+                randTaskID = taskIDs[Math.floor(Math.random() * taskIDs.length)]
+
+                editTask(randProjectID, randTaskID, {
+                    taskName : casual.title,
+                    taskDescription : casual.short_description,
+                    priority : casual.integer(0,2),
+                    taskStatus : casual.integer(0,2),
+                    assignedTo: allUserIDs[Math.floor(Math.random() * allUserIDs.length)],
+                    deadline : casual.date(format="MM/DD/YYYY")
+                })
+
+                setTimeout(function () {
+                    deleteTask(randProjectID, randTaskID);
+                }, 5000)
+
+            }, 1000)
+        });
+
     });
 
-    setTimeout(function() {
-        randEventID = eventIDs[Math.floor(Math.random() * eventIDs.length)]
 
-        editEvent(randEventID, {
-            eventName: "event" + Math.floor(Math.random() * 10000).toString(), 
-            eventDate: deadline[Math.floor(Math.random() * deadline.length)], 
-            location: ''})
-
-        setTimeout(function() {
-            deleteEvent(randEventID);
-        }, 500)
-    }, 1000)
-
-    // Random tasks
-    addTask({
-        taskName : taskNames[Math.floor(Math.random() * taskNames.length)],
-        taskDescription : taskDescription[Math.floor(Math.random() * taskDescription.length)],
-        priority : priority[Math.floor(Math.random() * priority.length)],
-        taskStatus : taskStatus[Math.floor(Math.random() * taskStatus.length)],
-        assignedTo: allUsernames[Math.floor(Math.random() * allUsernames.length)],
-        deadline : deadline[Math.floor(Math.random() * deadline.length)]
-    })
-
-    var taskIDs;
-    prolannerRef.child('tasks').once('value', function (snapshot) {
-        taskIDs = Object.keys(snapshot.val());
-    });
 
     setTimeout(function() {
-        randTaskID = taskIDs[Math.floor(Math.random() * taskIDs.length)]
-
-        editTask(randTaskID, {
-                taskName : taskNames[Math.floor(Math.random() * taskNames.length)],
-                taskDescription : taskDescription[Math.floor(Math.random() * taskDescription.length)],
-                priority : priority[Math.floor(Math.random() * priority.length)],
-                taskStatus : taskStatus[Math.floor(Math.random() * taskStatus.length)],
-                assignedTo: allUsernames[Math.floor(Math.random() * allUsernames.length)],
-                deadline : deadline[Math.floor(Math.random() * deadline.length)]
-        })
-
-        setTimeout(function () {
-            deleteTask(randTaskID);
-        }, 500)
-    }, 1000)
-
+        deleteProject(randProjectID);
+    },  7000);
 
     // simulate this person leaving after 'duration' seconds
     setTimeout(function () {
@@ -120,31 +125,33 @@ function simulate(){
 
 
 /* Simulating User Login & Logout */
-function login(username) {
+function login(userID) {
     // randomly logs in users 
-    prolannerRef.child('users').child(username).update({status: 'online'});
+    prolannerRef.child('users').child(userID).update({status: 'online'});
+    localStorage.setItem('userID', userID)
 }
-function logout(username) {
+
+function logout(userID) {
     // randomly logs out users 
-    prolannerRef.child('users').child(username).update({status: 'offline'});
+    prolannerRef.child('users').child(userID).update({status: 'offline'});
 }
 
 
 /* Task Operations */
 // add / edit / delete
 
-function addTask(taskObject) {
-    var taskRef = prolannerRef.child('tasks').push();
+function addTask(projectID, taskObject) {
+    var taskRef = prolannerRef.child('tasks').child(projectID).push();
     taskRef.set(taskObject)
 }
 
-function deleteTask(taskID) {
-    var taskRef = prolannerRef.child('tasks').child(taskID)
+function deleteTask(projectID, taskID) {
+    var taskRef = prolannerRef.child('tasks').child(projectID).child(taskID)
     taskRef.remove();
 }
 
-function editTask(taskID, taskObject) {
-    var taskRef = prolannerRef.child('tasks').child(taskID)
+function editTask(projectID, taskID, taskObject) {
+    var taskRef = prolannerRef.child('tasks').child(projectID).child(taskID)
     taskRef.update(taskObject)
 }
 
@@ -154,77 +161,109 @@ function editTask(taskID, taskObject) {
 
 function addProject(projectObject){
     var newProjectRef = prolannerRef.child('projects').push()
-    var userRef = prolannerRef.child('users').child(projectObject.members[0])
-    
-    newProjectRef.set(projectObject)
+    projectObject.projectMetaData.projectMembers.forEach(function(userID) {
+        var userRef = prolannerRef.child('users').child(userID)
+        userRef.child('projectIDs').once("value", function(snapshot) {
+            var projectIDs = snapshot.val()
+            if (projectIDs == null) {projectIDs = []}
+            projectIDs.push(newProjectRef.key())
+            userRef.child("projectIDs").set(projectIDs.filter(function(a){if (a!='') return a}))
+        });
+    })
+    var roomID = createChatRoom(projectObject.projectMetaData.createdBy, newProjectRef.key(), projectObject.projectMetaData.projectMembers)
+    projectObject.projectMetaData.relatedChatRoom = roomID;
+    projectObject.projectMetaData.projectID = newProjectRef.key();
 
-    userRef.once("value", function(snapshot) {
-      if(snapshot.child("projectIDs").exists()==false) {
-        var proj = [newProjectRef.key()]
-        userRef.child("projectIDs").set(proj)
-        console.log(projectObject.members[0]+": (new) "+proj)
-      }
-      else {
-        var proj = snapshot.child('projectIDs').val()
-        proj.push(newProjectRef.key())
-        userRef.child("projectIDs").set(proj)
-        console.log("New Proj:"+typeof(proj))
-      }
-    });
+    newProjectRef.set(projectObject)
 }
 
 function deleteProject(projectID){
-    console.log("Deleted proj: "+projectID)
+    //console.log("Deleted proj: "+projectID)
+    var roomID = "";
     var projRef = prolannerRef.child('projects').child(projectID)
-    projRef.once("value", function(snapshot) {
-      console.log("members:"+snapshot.child('members').val()[0])
+    projRef.child('projectMetaData').once("value", function(snapshot) {
+      //console.log("members:"+snapshot.child('members').val()[0])
       // d === false (because there is no "name/middle" child in the data snapshot)
-      var userRef = prolannerRef.child('users').child(snapshot.child('members').val()[0])
-      var projIDref = userRef.child('projectIDs')
-      projIDref.once("value", function(snapshot){
-        for(var i in snapshot.val()) {
-            console.log("sn:"+snapshot.val()[i]+"projid:"+projectID)
-            if (snapshot.val()[i] == projectID) {
-                console.log("Key:"+snapshot.val()[i].key())
-                //snapshot.val()[i].remove()
-                projIDref.child(Object.keys(snapshot.val())[i]).remove();
-            }
-        }
-      });
+        if (snapshot.val() == null) {return false}
+        roomID = snapshot.val().relatedChatRoom;
+        var projectMembers = snapshot.val().projectMembers;
+        projectMembers.forEach(function (userID) {
+            var userRef = prolannerRef.child('users').child(userID)
+            userRef.child('projectIDs').once("value", function(snapshot) {
+                var projectIDs = snapshot.val();
+                userRef.child("projectIDs").set(projectIDs.filter(function(a){if (a!=projectID) {return a}}))
+            });
+        })
     });
 
     setTimeout(function () {
+        if (roomID != "") {
             prolannerRef.child('projects').child(projectID).remove();
+            prolannerRef.child('chatrooms').child(roomID).remove();}
         }, 500)
 }
 
 function editProject(projectID, projectObject){
     var ProjectRef = prolannerRef.child('projects').child(projectID)
-    ProjectRef.update(projectObject)
+    ProjectRef.child('projectMetaData').update(projectObject.projectMetaData)
 }
 
 
 /* Event Operations */
 // add / edit / delete
 
-function addEvent(eventObject) {
-    var newEventRef = prolannerRef.child('events').push()
+function addEvent(projectID, eventObject) {
+    var newEventRef = prolannerRef.child('events').child(projectID).push()
     newEventRef.set(eventObject)
     
 }
 
-function deleteEvent(eventID) {
-    var eventRef = prolannerRef.child('events').child(eventID).remove();
+function deleteEvent(projectID, eventID) {
+    var eventRef = prolannerRef.child('events').child(projectID).child(eventID);
+    eventRef.remove();
 }
 
-function editEvent(eventID, eventObject) {
-    var eventRef = prolannerRef.child('events').child(eventID)
+function editEvent(projectID, eventID, eventObject) {
+    var eventRef = prolannerRef.child('events').child(projectID).child(eventID)
     eventRef.update(eventObject)
 }
 
+function selectNUsers(n) {
+    if (n >= allUserIDs.length) {return allUserIDs}
+    var _users = [];
+    for (var i = 0; i < n; i++) {
+        var _user = casual.random_element(allUserIDs);
+        while (_user in _users) {
+            _user = casual.random_element(allUserIDs);
+        }
+        _users.push(_user)
+    }
+    return _users
+}
 
-
+function createChatRoom(userID, projectID, members) {
+    var roomRef = prolannerRef.child('chatrooms').push();
+    var roomName = casual.title;
+    roomRef.set({
+        roomMessages: "",
+        roomMetaData: {
+            createdAt: Firebase.ServerValue.TIMESTAMP,
+            createdBy: userID,
+            relatedProject: projectID,
+            roomMembers: members,
+            roomName: roomName
+        }
+    })
+    var roomMessagesRef = prolannerRef.child('chatrooms').child(roomRef.key()).child('roomMessages').push();
+    roomMessagesRef.set({
+        content: "Welcome to chatroom " + roomName + ", enjoy your talk here :)",
+        name: "prolannerbot",
+        timestamp: Firebase.ServerValue.TIMESTAMP,
+        userID: "prolanner:0"
+    })
+    return roomRef.key();
+}
 
 
 // run each second
-setTimeout(function() {setInterval(simulate, 1000)}, 2000);
+setTimeout(function() {setInterval(simulate, 10000)}, 2000);
