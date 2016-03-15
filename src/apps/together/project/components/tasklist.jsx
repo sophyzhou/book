@@ -1,7 +1,5 @@
 MyComponents.task = React.createClass({
   render(){
-console.log("inside task")
-    console.log(this.props.task.taskName)
     return(
       <div className="card cyan darken-1">
       <div className="card-content white-text">

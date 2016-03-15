@@ -5,7 +5,6 @@ class App extends React.Component {
     return(
     <div>
       <MyComponents.TaskList tasks={this.props.data.tasks}/>
-      
     </div>
     );
   }

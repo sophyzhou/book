@@ -54,22 +54,6 @@
   <script type="text/babel" src="data_tasks.jsx"></script>
   <script type="text/babel" src="js/chatroom.js"></script>
 
-
-  <!-- In order to avoid merge conflicts in data.jsx, I'm just rendering components as you would in data.jsx -->
-  <script type="text/babel">
-    ReactDOM.render(
-      <MyComponents.NavBar/>,
-      $('#navbar').get(0)
-    );
-  </script>
-
-  <!-- <script type="text/babel">
-    ReactDOM.render(
-      <MyComponents.TaskList/>,
-      $('#tasklist').get(0)
-    );
-  </script> -->
-
   <script>
     (function(){
         var searchFilter = {
@@ -99,8 +83,8 @@
   <div id="navbar"></div>
   <div class="row">
     <h1></h1>
-    <div class="col s6" id="chat"></div>
     <div class="col s6" id="tasklist"></div>
+    <div class="col s6" id="chat"></div>
   </div>
 </body>
 </html>

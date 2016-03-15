@@ -12,34 +12,25 @@ function render(){
         data={data}/>,
     $('#tasklist').get(0)
   );
+  ReactDOM.render(
+    <MyComponents.NavBar/>,
+    $('#navbar').get(0)
+  );
 }
 
+//
 
+// gets all task values for a given project ID
 prolannerRef.child('tasks').child(projectID).on('value', function(snapshot){
-    console.log(snapshot.val())
+    // gets all task IDs
     var taskIDs = Object.keys(snapshot.val())
     taskIDs.forEach(function(taskID){
-    	console.log("final")
-    	console.log(taskID)
-    	prolannerRef.child('tasks').child(projectID).child(taskID).on('value', function(sn){
-    		data.tasks.push(sn.val())
-    	})
-    	
-    	//data.tasks.push(taskID)
-    	render()
+      // gets all the values within a task ID
+      prolannerRef.child('tasks').child(projectID).child(taskID).on('value', function(sn){
+        data.tasks.push(sn.val())
+      })
+      
+      render()
 
     })
-
-    /*console.log(Object.keys(snapshot.val()))
-    for(var i in Object.keys(snapshot.val()))
-    {
-        data.tasks.push(prolannerRef.child('tasks').child(projectID).child(Object.keys(snapshot.val())[i]))
-        render();
-        //prolannerRef.child('tasks').child(projectID).child(Object.keys(snapshot.val())[i]).
-        console.log("data val")
-        console.log(data.tasks)
-
-    }*/
 })
-
-console.log("tasks:"+data.tasks)
