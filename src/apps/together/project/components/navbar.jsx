@@ -3,7 +3,7 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper cyan darken-3">
-          <a href="index.html" className="brand-logo center">Prolanner</a>
+          <a href="index.html" className="brand-logo center" id="logo">Prolanner</a>
           <ul id="nav-mobile" className="right">
             <li><a href="/apps/together/landing/">Landing</a></li>
           </ul>
