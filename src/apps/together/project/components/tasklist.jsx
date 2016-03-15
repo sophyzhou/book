@@ -66,32 +66,27 @@ class TaskList extends React.Component {
     return (
       <div className="row">
 
-        <div className="col s3 m5">
-          <div className="card darken-1">
-            <div className="card-content black-text">
-              <span className="card-title">Do</span>
-              {todo}
-            </div>
+        <div className="col s3 m4">
+          <div className="black-text center">
+            <h5>Do</h5>
           </div>
+          {todo}
         </div>
 
-        <div className="col s3 m5">
-          <div className="card darken-1">
-            <div className="card-content black-text">
-              <span className="card-title">Doing</span>
-              {doing}
-            </div>
+        <div className="col s3 m4">
+          <div className="black-text center">
+            <h5>Doing</h5>
           </div>
+          {doing}
         </div>
 
-        <div className="col s3 m5">
-          <div className="card darken-1">
-            <div className="card-content black-text">
-              <span className="card-title">Done</span>
-              {done}
-            </div>
+        <div className="col s3 m4">
+          <div className="black-text center">
+            <h5>Done</h5>
           </div>
-        </div>        
+          {done}
+        </div>
+
       </div>
     );
   }
