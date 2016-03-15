@@ -8,10 +8,8 @@ actions.sendMessage = function(roomID, messageContent) {
 }
 
 
-var user = {
-    userID: 'github:11863763',
-    name: 'peizhe'
-}
+var user = JSON.parse(sessionStorage.getItem('user'))
+console.log(user)
 
 var members = {};
 
@@ -32,7 +30,7 @@ prolannerRef.child('projects').child(projectID).child('projectMetaData').once('v
         chatRoomName = snapshot.val().roomName;
         var prolannerRef = new Firebase('https://prolanner.firebaseio.com/')
         snapshot.val().roomMembers.forEach(function(userID) {
-            var userRef = prolannerRef.child('users').child(userID).once('value', function(snapshot){
+            prolannerRef.child('users').child(userID).once('value', function(snapshot){
                 var user = snapshot.val();
                 console.log(user.displayName)
                 members[user.userID] = {}
