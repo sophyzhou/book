@@ -74,7 +74,7 @@ class ChatRoom extends React.Component {
 
             <div className="chat">
                 <div className="chat-header clearfix">
-                    <img src="https://avatars3.githubusercontent.com/u/11863763" alt="avatar" />
+                    <img src={"https://avatars3.githubusercontent.com/u/"+ user.userID} alt="avatar" />
 
                     <div className="chat-about">
                         <div className="chat-with">ChatRoom: {chatRoomName}</div>

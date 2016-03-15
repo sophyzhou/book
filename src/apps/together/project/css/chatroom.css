@@ -10,21 +10,13 @@ body {
 
 .container {
     margin: 0 auto;
-<<<<<<< HEAD
-    width: 690px;
-=======
     width: 575px;
->>>>>>> c86c22b4b4b907fdfff52483562774e681dfc84c
     background: #444753;
     border-radius: 5px;
 }
 
 .people-list {
-<<<<<<< HEAD
-    width: 200px;
-=======
     width: 185px;
->>>>>>> c86c22b4b4b907fdfff52483562774e681dfc84c
     float: left;
     overflow-y: auto;
 }
