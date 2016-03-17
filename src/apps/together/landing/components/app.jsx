@@ -1,10 +1,9 @@
 class App extends React.Component {
   render(){
-    console.log("projs:"+this.props.data.projects)
-    return(
+    return (
     <div>
       <MyComponents.NavBar actions={this.props.actions}/>
-      <div className="container">
+      <div className="container white">
         <MyComponents.User user={this.props.data.user}/>
         <MyComponents.ProjView projs={this.props.data.projects}
         user={this.props.data.user}/>

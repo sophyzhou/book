@@ -5,9 +5,9 @@ MyComponents.todo = React.createClass({
   render(){
     if (this.props.task.taskStatus == 0) return (
       <div className="card cyan darken-1">
-      <div className="card-content white-text">
-        <p>{this.props.task.taskName}</p>
-      </div>
+        <div className="card-content white-text">
+          <p>{this.props.task.taskName}</p>
+        </div>
       </div>
     );
     else return (

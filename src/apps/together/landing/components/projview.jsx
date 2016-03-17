@@ -1,10 +1,8 @@
 MyComponents.proj = React.createClass({
   render: function(){
-
     var projID = this.props.proj.projectMetaData.projectID
     var url = "/apps/together/project/#"+projID
-    console.log("url: "+url)
-    return(
+    return (
       <div className="col s6">
         <div className="card cyan darken-1">
           <div className="card-content">
@@ -25,6 +23,13 @@ class ProjView extends React.Component {
     if (this.props.user) {
       return(
         <div className="row">
+          <div className="col s6">
+            <div className="card blue-grey lighten-4">
+              <div className="card-content">
+                <a href="#"><span className="card-title blue-grey-text"><h4>+ New Project</h4></span></a>
+              </div>
+            </div>
+          </div>
           {proj}
         </div>
       );

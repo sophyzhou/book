@@ -12,10 +12,6 @@ function render(){
         data={data}/>,
     $('#tasklist').get(0)
   );
-  ReactDOM.render(
-    <MyComponents.NavBar/>,
-    $('#navbar').get(0)
-  );
 }
 
 //

@@ -16,7 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
 
-
     <!-- React & JQuery Stuff -->
     <script src="../lib/react.js"></script>
     <script src="../lib/react-dom.js"></script>
@@ -44,10 +43,6 @@
   <script>
     // MyComponents is a global object where each property is a reference to a component class
     MyComponents = {}
-  </script>
-
-  <script>
-
   </script>
 
   <!-- Import Your Components Below -->
@@ -84,6 +79,13 @@
         searchFilter.init();
 
     })();
+  </script>
+
+  <script type="text/babel">
+    ReactDOM.render(
+      <MyComponents.NavBar/>,
+      $('#navbar').get(0)
+    );
   </script>
 
   <!-- Component Divs -->

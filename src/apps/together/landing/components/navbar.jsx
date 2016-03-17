@@ -6,10 +6,7 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper cyan darken-3">
-          <ul className="left">
-            <li><a href="/">Home</a></li>
-          </ul>
-          <a href="index.html" className="brand-logo center">Prolanner</a>
+          <a href="/apps/together/" className="brand-logo center" id="logo">Prolanner</a>
           <ul id="nav-mobile" className="right">
             <li><a href="#" onClick={this.props.actions.logout}>Logout</a></li>
           </ul>
@@ -24,7 +21,7 @@ class NavBar extends React.Component {
           <ul className="left">
             <li><a href="/">Home</a></li>
           </ul>
-          <a href="index.html" className="brand-logo center">Prolanner</a>
+          <a href="index.html" className="brand-logo center" id="logo">Prolanner</a>
           <ul id="nav-mobile" className="right">
             <li><a href="#" onClick={this.props.actions.login}>Login via Github</a></li>
           </ul>
