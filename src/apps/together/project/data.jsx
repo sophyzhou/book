@@ -54,6 +54,7 @@ function render_chatroom() {
         <MyComponents.ChatRoom
             messages={messages}
             chatRoomName = {chatRoomName}
+            roomID = {roomID}
             user = {user}
             members = {members}
             actions = {actions}/>,

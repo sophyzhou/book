@@ -1,15 +1,4 @@
-
 function timeConverter(timestamp){
-    //var a = new Date(timestamp * 1000);
-    //var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    //var year = a.getFullYear();
-    //var month = months[a.getMonth()];
-    //var date = a.getDate();
-    //var hour = a.getHours();
-    //var min = a.getMinutes();
-    //var sec = a.getSeconds();
-    //var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    //return time;
     var date = (timestamp) ? new Date(timestamp) : new Date(),
         month = date.getMonth() + 1,
         day = date.getDate() ,
@@ -24,27 +13,32 @@ function timeConverter(timestamp){
 }
 
 
-console.log("TIMESTAMP\n")
-console.log(Firebase.ServerValue.TIMESTAMP)
-var chatRef = new Firebase('https://prolanner.firebaseio.com/chat')
-chatRef.child('room-messages').child('-KCXbd_aMWUBCvc6GPQj').child('-KCXbedLWG0Fhhykf8aw').update({timestamp:Firebase.ServerValue.TIMESTAMP})
+var prolannerRef = new Firebase('https://prolanner.firebaseio.com')
 var messageToSend = "";
 
 class ChatRoom extends React.Component {
 
-    onChange(e) {
-        messageToSend = e.target.value;
+    buttonclick() {
+        var content = document.getElementById('message-to-send').value
+        var messageRef = prolannerRef.child('chatrooms').child(this.props.roomID).child('roomMessages').push()
+        if (content != "") {
+            messageRef.set({
+                content: content,
+                name: this.props.user.displayName,
+                timestamp: Firebase.ServerValue.TIMESTAMP,
+                userID: this.props.user.userID
+            })
+        } else {
+            Materialize.toast('You cannot send empty message', 3000, 'rounded')
+        }
+        document.getElementById('message-to-send').value = ""
     }
 
-    buttonclick(e) {
-        console.log(messageToSend);
-    }
     render() {
         var messages = this.props.messages;
         var user = this.props.user;
         var chatRoomName = this.props.chatRoomName;
         var members = this.props.members;
-        //console.log(this.props.messages)
         return (
         <div className="container clearfix">
 
@@ -65,7 +59,6 @@ class ChatRoom extends React.Component {
                                     </div>
                                 </li>
                             )
-
                         })
                     }
 
@@ -123,12 +116,12 @@ class ChatRoom extends React.Component {
                 </div>
 
                 <div className="chat-message clearfix">
-                    <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" onChange={this.handleChange}></textarea>
+                    <textarea name="message-to-send" id="message-to-send" placeholder ="Type your message" rows="3" ></textarea>
 
                     <i className="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
                     <i className="fa fa-file-image-o"></i>
 
-                    <button onclick={this.buttonclick}>Send</button>
+                    <button  onClick={() => this.buttonclick()}>Send</button>
 
                 </div>
 
