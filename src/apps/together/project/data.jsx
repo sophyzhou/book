@@ -46,6 +46,8 @@ prolannerRef.child('projects').child(projectID).child('projectMetaData').once('v
         messages = snapshot.val();
         console.log(messages);
         render_chatroom();
+        var element = document.getElementById("history");
+        element.scrollTop = element.scrollHeight;
     })
 })
 
