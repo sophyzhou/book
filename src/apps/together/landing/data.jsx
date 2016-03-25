@@ -1,11 +1,21 @@
 // a single 'data' object that holds the data of your entire app, with initial values
 var data = {
-  projects: []
+  projects: [],
 }
 
 // a single 'handlers' object that holds all the actions of your entire app
-var actions = {
-  logged: 'false'
+var actions;
+if (localStorage.getItem('prolanner::user') != null) {
+  //console.log(localStorage.getItem('prolanner::user') )
+  actions = {
+    logged: true
+  };
+  data.user = JSON.parse(localStorage.getItem('prolanner::user'))
+  //console.log(data.user)
+} else {
+  actions = {
+    logged: false
+  }
 }
 
 // the main render() function. call this function whenever the app's UI
@@ -120,6 +130,8 @@ actions.logout = function(){
 
     // set the user's status to offline
     userRef.child('status').set('offline')
+    localStorage.removeItem('prolanner::user')
+    console.log('delete prolanner')
 
     data.user = null
 
