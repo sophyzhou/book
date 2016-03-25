@@ -21,12 +21,13 @@ class ProjView extends React.Component {
     })
 
     if (this.props.user) {
+      var url = "newProj.html#"+this.props.user.userID
       return(
         <div className="row">
           <div className="col s6">
             <div className="card blue-grey lighten-4">
               <div className="card-content">
-                <a href="#"><span className="card-title blue-grey-text"><h4>+ New Project</h4></span></a>
+                <a href={url} target="_blank"><span className="card-title blue-grey-text"><h4>+ New Project</h4></span></a>
               </div>
             </div>
           </div>
