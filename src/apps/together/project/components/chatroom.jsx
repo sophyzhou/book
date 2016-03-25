@@ -32,8 +32,6 @@ class ChatRoom extends React.Component {
             Materialize.toast('You cannot send empty message', 3000, 'rounded')
         }
         document.getElementById('message-to-send').value = ""
-        var element = document.getElementById("history");
-        element.scrollTop = element.scrollHeight*1.1;
     }
 
     render() {

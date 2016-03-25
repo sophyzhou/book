@@ -68,7 +68,7 @@ actions.login = function(){
           firebaseRef.child("users").child(gid).update({status:"online"});
           uref.on('value', function(snapshot){
             data.user = snapshot.val()
-            sessionStorage.setItem('user', JSON.stringify(data.user))
+            localStorage.setItem('prolanner::user', JSON.stringify(data.user))
             console.log("bajksd:"+snapshot.val())
             var projects = _.values(snapshot.val().projectIDs)
             data.projects=[]
