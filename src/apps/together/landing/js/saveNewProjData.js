@@ -37,6 +37,6 @@ function saveData() {
 
 	})
 
-
+	window.top.close();
 
 }

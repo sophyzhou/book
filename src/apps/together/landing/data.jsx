@@ -38,9 +38,23 @@ var firebaseRef = new Firebase('https://prolanner.firebaseio.com')
 
 // Real-time Data (load constantly on changes)
 firebaseRef.once('value', function(snapshot){
-    data.projects= _.values(snapshot.val().projects)
-    render()
+   
+    if(actions.logged) {
+      var projects = data.user.projectIDs
+      data.projects=[]
+      for (var i in projects) {
+        var projRef = firebaseRef.child("projects").child(projects[i])
+        projRef.on('value',function(snapshot){
+          data.projects.push(snapshot.val())
+          render()
+        })
+      }
+    }
 
+    else {
+      data.projects= _.values(snapshot.val().projects)
+      render()
+    }
   })
 
 actions.login = function(){
@@ -69,7 +83,6 @@ actions.login = function(){
       var isUserPresent;
       var gid = "github:"+authData.github.id
 
-      console.log("UN:"+user.username)
       userRef.once('value', function(snapshot){
         console.log("exists:"+snapshot.child(gid).exists())
         if(snapshot.child(gid).exists()==true) {
@@ -79,8 +92,9 @@ actions.login = function(){
           uref.on('value', function(snapshot){
             data.user = snapshot.val()
             localStorage.setItem('prolanner::user', JSON.stringify(data.user))
-            console.log("bajksd:"+snapshot.val())
             var projects = _.values(snapshot.val().projectIDs)
+            console.log("Projects: ")
+            console.log(projects)
             data.projects=[]
             for (var i in projects) {
               var projRef = firebaseRef.child("projects").child(projects[i])
@@ -89,8 +103,6 @@ actions.login = function(){
                 render()
               })
             }
-            console.log("new proj:"+data.projects)
-            render()
           })
         }
         else {
