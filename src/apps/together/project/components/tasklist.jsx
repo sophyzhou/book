@@ -68,9 +68,12 @@ class TaskList extends React.Component {
     return (
       <div className="row">
 
+        <div className="black-text center">
+          <h5>TASKS <a href={url} target="_blank" className="btn-floating btn-medium waves-effect waves-light light-green darken-3"><i className="material-icons">add</i></a></h5>
+        </div>
+
         <div className="col s3 m4">
           <div className="black-text center">
-            <a href={url} target="_blank"><span className="card-title blue-grey-text"><h5>Add New Task</h5></span></a>
             <h5>DO</h5>
           </div>
           {todo}
