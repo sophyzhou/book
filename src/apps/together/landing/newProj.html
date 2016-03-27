@@ -56,33 +56,39 @@
     MyComponents = {}
   </script>
 
-  <!-- Import Your Components Below -->
-  <script type="text/babel" src="components/newprojectform.jsx"></script>
-
-  <!-- Main app container  -->
-  <script type="text/babel" src="components/newFormApp.jsx"></script>
-
   <!-- Connect the app and data -->
-  <script type="text/babel" src="newProjdata.jsx"></script>
   <script type="text/javascript" src="js/saveNewProjData.js"></script>
 
-  <div class="row">
-    <form class="col s12" action="javascript:saveData();">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="project_name" type="text" class="validate">
-          <label for="project_name">Project Name</label>
-        </div>
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper cyan darken-3">
+        <ul id="nav-mobile" class="left">
+          <li>
+            <a href="/apps/together/landing/">
+              <i class="material-icons">arrow_back</i>
+            </a>
+          </li>
+        </ul>
+        <a href="index.html" class="brand-logo center" id="logo">Prolanner</a>
       </div>
-      
+    </nav>
+  </header>
 
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-    <i class="material-icons right">send</i>
-  </button>
-    </form>
-  </div>
-
-
+  <div class="container white">
+    <div class="col">
+      <form class="col s12" action="javascript:saveData();">
+        <div class="row">
+          <div class="input-field col s6">
+            <input id="project_name" type="text" class="validate">
+            <label for="project_name">Project Name</label>
+          </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div> <!-- row
+<!--   </div>  --><!-- container --> 
 
 </body>
 </html>
