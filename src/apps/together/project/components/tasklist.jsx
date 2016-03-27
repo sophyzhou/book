@@ -71,21 +71,21 @@ class TaskList extends React.Component {
         <div className="col s3 m4">
           <div className="black-text center">
             <a href={url} target="_blank"><span className="card-title blue-grey-text"><h5>Add New Task</h5></span></a>
-            <h5>Do</h5>
+            <h5>DO</h5>
           </div>
           {todo}
         </div>
 
         <div className="col s3 m4">
           <div className="black-text center">
-            <h5>Doing</h5>
+            <h5>DOING</h5>
           </div>
           {doing}
         </div>
 
         <div className="col s3 m4">
           <div className="black-text center">
-            <h5>Done</h5>
+            <h5>DONE</h5>
           </div>
           {done}
         </div>

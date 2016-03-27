@@ -6,12 +6,8 @@ actions.sendMessage = function(roomID, messageContent) {
     firechat.sendMessage(roomId, messageContent, messageType='default', function(){})
 }
 
-
 var user = JSON.parse(localStorage.getItem('prolanner::user'))
-//console.log(user)
-
 var members = {};
-
 
 // Get the project id from the url
 var projectID = window.location.hash.substring(1);
