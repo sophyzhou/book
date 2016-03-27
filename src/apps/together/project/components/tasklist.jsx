@@ -63,11 +63,14 @@ class TaskList extends React.Component {
       return <MyComponents.done task={u} key={i} />
     });
 
+    var projectID = window.location.hash.substring(1);
+    var url = "addtask.html#"+projectID
     return (
       <div className="row">
 
         <div className="col s3 m4">
           <div className="black-text center">
+            <a href={url} target="_blank"><span className="card-title blue-grey-text"><h5>Add New Task</h5></span></a>
             <h5>Do</h5>
           </div>
           {todo}
