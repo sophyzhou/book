@@ -16,6 +16,7 @@ function saveData() {
   if (eventDate == "" || eventName == "" || location == "") {
      Materialize.toast('Sorry, you are missing a field.', 4000)
   }
+  
   else {
     newEventRef.set(events)
     window.top.close();

@@ -8,11 +8,11 @@ MyComponents.event = React.createClass({
             <span className="title">{this.props.event.eventName}</span>
               <p><b>Location</b>: {this.props.event.location}<br/>
               <b>Date</b>: {this.props.event.eventDate}</p>
+              <div className="secondary-content"><i className="material-icons white-text">close</i></div>
           </li>
         </ul>
       </div>
     );
-
   }
 });
 
