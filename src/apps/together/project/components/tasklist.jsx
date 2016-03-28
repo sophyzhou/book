@@ -18,7 +18,8 @@ MyComponents.todo = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-1">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <p><i>{this.props.task.taskDescription}</i><br/>
+          <i className="material-icons secondary-content cyan-text move">arrow forward</i>
+          <p><i>{this.props.task.taskDescription}</i> <br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
           <div className="chip orange white-text">{this.props.task.assignedTo}</div>
@@ -48,6 +49,7 @@ MyComponents.doing = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-3">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
+          <i className="material-icons secondary-content cyan-text move">arrow forward</i>
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
