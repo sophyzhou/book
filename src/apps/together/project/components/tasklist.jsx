@@ -26,7 +26,7 @@ MyComponents.todo = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-1">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <a onClick={this.handleClick}><i  className="material-icons secondary-content cyan-text move" >arrow forward</i></a>
+          <a onClick={this.handleClick}><i  className="material-icons secondary-content move" >arrow forward</i></a>
           <p><i>{this.props.task.taskDescription}</i> <br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
@@ -65,7 +65,7 @@ MyComponents.doing = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-3">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <a onClick={this.handleClick}><i  className="material-icons secondary-content cyan-text move" >arrow forward</i></a>
+          <a onClick={this.handleClick}><i className="material-icons secondary-content move" >arrow forward</i></a>
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
