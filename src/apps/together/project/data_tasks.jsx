@@ -45,6 +45,7 @@ prolannerRef.child('tasks').child(projectID).on('value', function(snap){
 prolannerRef.child('events').child(projectID).on('value', function(snapshot){
   // gets all event IDs
   var eventIDs = Object.keys(snapshot.val())
+  data.events=[]
   eventIDs.forEach(function(eventID){
     // gets all the values within a event ID
     prolannerRef.child('events').child(projectID).child(eventID).on('value', function(sna){
