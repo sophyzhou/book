@@ -2,6 +2,14 @@
 // Task Status Classes - Do, Doing, Done
 //
 MyComponents.todo = React.createClass({
+  handleClick: function(event) {
+    var prolannerRef = new Firebase('https://prolanner.firebaseio.com')
+    var projectID = window.location.hash.substring(1);
+    var key = this.props.task.key
+    var taskRef = prolannerRef.child('tasks').child(projectID).child(key)
+
+    taskRef = taskRef.update({taskStatus: 1})
+  },
   render(){
     var priority;
     if (this.props.task.priority == 0) {
@@ -18,7 +26,7 @@ MyComponents.todo = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-1">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <i className="material-icons secondary-content cyan-text move">arrow forward</i>
+          <a onClick={this.handleClick}><i  className="material-icons secondary-content cyan-text move" >arrow forward</i></a>
           <p><i>{this.props.task.taskDescription}</i> <br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
@@ -33,6 +41,14 @@ MyComponents.todo = React.createClass({
 });
 
 MyComponents.doing = React.createClass({
+  handleClick: function(event) {
+    var prolannerRef = new Firebase('https://prolanner.firebaseio.com')
+    var projectID = window.location.hash.substring(1);
+    var key = this.props.task.key
+    var taskRef = prolannerRef.child('tasks').child(projectID).child(key)
+
+    taskRef = taskRef.update({taskStatus: 2})
+  },
   render(){
     var priority;
     if (this.props.task.priority == 0) {
@@ -49,7 +65,7 @@ MyComponents.doing = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-3">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <i className="material-icons secondary-content cyan-text move">arrow forward</i>
+          <a onClick={this.handleClick}><i  className="material-icons secondary-content cyan-text move" >arrow forward</i></a>
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>

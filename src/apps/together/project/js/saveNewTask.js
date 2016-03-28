@@ -10,8 +10,10 @@ function saveData() {
   var projectID = window.location.hash.substring(1);
   var newTaskRef = prolannerRef.child('tasks').child(projectID).push()
   var assignedTo = document.getElementById("name").innerHTML
+  var key = newTaskRef.key()
 
   var tasks = {
+    key: key,
     assignedTo: assignedTo,
     deadline: taskDate,
     priority: priority,
