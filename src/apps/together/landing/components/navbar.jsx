@@ -8,7 +8,7 @@ class NavBar extends React.Component {
         <div className="nav-wrapper cyan darken-3">
           <a href="/apps/together/" className="brand-logo center" id="logo">Prolanner</a>
           <ul id="nav-mobile" className="right">
-            <li><a href="#" onClick={this.props.actions.logout}>Logout</a></li>
+            <li><a href="#" onClick={this.props.actions.logout}>LOGOUT</a></li>
           </ul>
         </div>
       </nav>
@@ -23,7 +23,7 @@ class NavBar extends React.Component {
           </ul>
           <a href="index.html" className="brand-logo center" id="logo">Prolanner</a>
           <ul id="nav-mobile" className="right">
-            <li><a href="#" onClick={this.props.actions.login}>Login via Github</a></li>
+            <li><a href="#" onClick={this.props.actions.login}>LOGIN VIA GITHUB</a></li>
           </ul>
         </div>
       </nav>

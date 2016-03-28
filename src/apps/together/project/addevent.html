@@ -38,6 +38,7 @@
       margin: 0.25em auto;
     }
     .container {
+      margin: 2em auto;
       opacity: 0.85;
       padding: 0 2em;
     }
@@ -58,21 +59,38 @@
 
   <!-- Connect the app and data -->
   <script type="text/javascript" src="js/saveNewEventData.js"></script>
-
-  <div class="row">
-    <form class="col s12" action="javascript:saveData();">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="event_name" type="text" class="validate">
-          <label for="event_name">Event Name</label>
-        </div>
+  
+  <header class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper cyan darken-3">
+        <ul id="nav-mobile" class="left">
+          <li>
+            <a href="/apps/together/landing/">
+              <i class="material-icons">arrow_back</i>
+            </a>
+          </li>
+        </ul>
+        <a href="index.html" class="brand-logo center" id="logo">Prolanner</a>
       </div>
-
-
-      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-    <i class="material-icons right">send</i>
-  </button>
-    </form>
+    </nav>
+  </header>
+  
+  <div class="container white">
+    <div class="row">
+      <form class="col s12" action="javascript:saveData();">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="event_name" type="text" class="validate">
+            <label for="event_name">Event Name</label>
+          </div>
+        </div>
+        <div class="row center">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 
 

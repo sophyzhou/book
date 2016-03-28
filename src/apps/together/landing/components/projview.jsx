@@ -4,7 +4,7 @@ MyComponents.proj = React.createClass({
     var url = "/apps/together/project/#"+projID
     return (
       <div className="col s6">
-        <div className="card cyan darken-1">
+        <div className="card teal lighten-1">
           <div className="card-content">
             <a href={url}><span className="card-title white-text"><h4>{this.props.proj.projectMetaData.projectName}</h4></span></a>
           </div>

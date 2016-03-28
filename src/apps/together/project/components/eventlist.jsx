@@ -4,7 +4,7 @@ MyComponents.event = React.createClass({
   render(){
     return (
       <div className="col s3">
-        <div className="card light-green darken-1">
+        <div className="card teal lighten-1">
           <div className="card-content white-text">
             <p>{this.props.event.eventName}</p>
           </div>
@@ -25,7 +25,7 @@ class EventList extends React.Component {
       return <MyComponents.event event={e} key={i} />
     });
     var projectID = window.location.hash.substring(1);
-    var url = "inbox.html#"+projectID
+    var url = "addevent.html#"+projectID
     return (
 
         <div className="row">

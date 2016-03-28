@@ -5,8 +5,8 @@ class User extends React.Component {
     if (this.props.user){
       // user is authenticated
       return <div>
-          <h4 className="center-align">Welcome {this.props.user.displayName}!</h4>
-        </div>
+        <h4 className="center-align">Welcome, {this.props.user.displayName}!</h4>
+      </div>
     } else {
       // user is not set
       return <div>
