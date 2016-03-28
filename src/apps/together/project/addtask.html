@@ -88,6 +88,13 @@
 
         <div class="row">
           <div class="input-field col s12">
+            <textarea id="task_desc" class="materialize-textarea"></textarea>
+            <label for="task_desc">Task Description</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
              <select id="priority">
                <option value="" disabled selected>Choose Priority</option>
                <option value="0">High</option>
@@ -95,19 +102,6 @@
                <option value="2">Low</option>
              </select>
              <label>Priority</label>
-           </div>
-        </div>
-
-        <div class="row">
-          <div class="input-field col s12">
-             <select id="type">
-               <option value="" disabled selected>Choose Type</option>
-               <option value="chore">Chore</option>
-               <option value="school">School</option>
-               <option value="personal">Personal</option>
-               <option value ="other">Other</option>
-             </select>
-             <label>Type</label>
            </div>
         </div>
 
@@ -140,7 +134,7 @@
     selectMonths: true, // Creates a dropdown to control month
     selectYears: 15 // Creates a dropdown of 15 years to control year
   });
-  
+
   $(document).ready(function() {
     $('select').material_select();
   });
