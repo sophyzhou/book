@@ -88,6 +88,18 @@
 
         <div class="row">
           <div class="input-field col s12">
+             <select id="status">
+               <option value="" disabled selected>Choose status</option>
+               <option value="0">Do</option>
+               <option value="1">Doing</option>
+               <option value="2">Done</option>
+             </select>
+             <label>Status</label>
+           </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
              <select id="priority">
                <option value="" disabled selected>Choose Priority</option>
                <option value="0">High</option>
@@ -132,6 +144,6 @@
     $('select').material_select();
   });
   </script>
-  
+
 </body>
 </html>

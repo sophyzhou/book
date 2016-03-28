@@ -24,11 +24,14 @@ class EventList extends React.Component {
     });
 
     return (
-      <div className="row">
-      <ul className="collapsible" data-collapsible="accordion">
-        {event}
+    <div className="row">
+      <div className="col s3 m5">
+        <ul className="collapsible" data-collapsible="accordion">
+          {event}
         </ul>
       </div>
+    </div>
+
     );
   }
   componentDidMount(){
