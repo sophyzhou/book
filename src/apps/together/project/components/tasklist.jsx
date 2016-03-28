@@ -20,7 +20,9 @@ MyComponents.todo = React.createClass({
         <div className="collapsible-body black-text">
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
-          <b>Deadline</b>: {this.props.task.deadline}</p>
+          <b>Deadline</b>: {this.props.task.deadline}<br/>
+          <b>AssignedTo</b>: {this.props.task.assignedTo}</p>
+
         </div>
       </li>
     );
@@ -49,7 +51,8 @@ MyComponents.doing = React.createClass({
         <div className="collapsible-body black-text">
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
-          <b>Deadline</b>: {this.props.task.deadline}</p>
+          <b>Deadline</b>: {this.props.task.deadline}<br/>
+          <b>AssignedTo</b>: {this.props.task.assignedTo}</p>
         </div>
       </li>
     );
@@ -78,7 +81,8 @@ MyComponents.done = React.createClass({
         <div className="collapsible-body black-text">
           <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
-          <b>Deadline</b>: {this.props.task.deadline}</p>
+          <b>Deadline</b>: {this.props.task.deadline}<br/>
+          <b>AssignedTo</b>: {this.props.task.assignedTo}</p>
         </div>
       </li>
     );

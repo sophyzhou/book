@@ -23,12 +23,14 @@ function render_events(){
   );
 }
 
+
 //
 
 // gets all task values for a given project ID
 prolannerRef.child('tasks').child(projectID).on('value', function(snap){
   // gets all task IDs
   var taskIDs = Object.keys(snap.val())
+  data.tasks=[]
   taskIDs.forEach(function(taskID){
     // gets all the values within a task ID
     prolannerRef.child('tasks').child(projectID).child(taskID).on('value', function(sn){
