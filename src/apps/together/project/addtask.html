@@ -157,21 +157,16 @@
   var projRef = new Firebase('https://prolanner.firebaseio.com').child("projects").child(window.location.hash.substring(1)).child("projectMetaData")
 
   projRef.once('value', function(snapshot){
-    console.log(snapshot.child("projectMembers").val())
     var projMem = snapshot.child("projectMembers").val()
+
     for(var i in projMem) {
-      console.log("asds"+projMem[i])
       var userRef = new Firebase('https://prolanner.firebaseio.com').child("users").child(projMem[i])
       userRef.on('value', function(sn) {
-        console.log(sn.child("displayName").val())
-        $('#dropdown1').append('<li onclick="assig(\''+projMem[i]+'\','+'\''+sn.child("displayName").val()+'\''+')">'+sn.child("displayName").val()+'</li>')
+        $('#dropdown1').append('<li onclick="assig(\''+projMem[i]+'\','+'\''+sn.child("userName").val()+'\''+')">'+sn.child("userName").val()+'</li>')
         })
     }
   })
-              //var s= document.getElementById("one");
-              //s.innerHTML = "newvalue";
-  console.log(window.location.hash.substring(1))
-            
+  
   function assig(id, name) {
     $('#name').append(name)
     $('#githubID').append(id)
