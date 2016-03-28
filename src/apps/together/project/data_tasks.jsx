@@ -7,18 +7,18 @@ var data = {
 
 var projectID = window.location.hash.substring(1);
 
-function render(){
+function render_tasks(){
   ReactDOM.render(
-    <MyComponents.App
-        data={data}/>,
+    <MyComponents.TaskList
+        tasks={data.tasks}/>,
     $('#tasklist').get(0)
   );
 }
 
-function render(){
+function render_events(){
   ReactDOM.render(
-    <MyComponents.App
-        data={data}/>,
+    <MyComponents.EventList
+        events={data.events}/>,
     $('#eventlist').get(0)
   );
 }
@@ -27,29 +27,29 @@ function render(){
 
 // gets all task values for a given project ID
 prolannerRef.child('tasks').child(projectID).on('value', function(snap){
-    // gets all task IDs
-    var taskIDs = Object.keys(snap.val())
-    taskIDs.forEach(function(taskID){
-      // gets all the values within a task ID
-      prolannerRef.child('tasks').child(projectID).child(taskID).on('value', function(sn){
-        data.tasks.push(sn.val())
-      })
-
-      render()
-
+  // gets all task IDs
+  var taskIDs = Object.keys(snap.val())
+  taskIDs.forEach(function(taskID){
+    // gets all the values within a task ID
+    prolannerRef.child('tasks').child(projectID).child(taskID).on('value', function(sn){
+      data.tasks.push(sn.val())
     })
+
+    render_tasks()
+
+  })
 })
 
 prolannerRef.child('events').child(projectID).on('value', function(snapshot){
-    // gets all event IDs
-    var eventIDs = Object.keys(snapshot.val())
-    eventIDs.forEach(function(eventID){
-      // gets all the values within a event ID
-      prolannerRef.child('events').child(projectID).child(eventID).on('value', function(sna){
-        data.events.push(sna.val())
-      })
-
-      render()
-
+  // gets all event IDs
+  var eventIDs = Object.keys(snapshot.val())
+  eventIDs.forEach(function(eventID){
+    // gets all the values within a event ID
+    prolannerRef.child('events').child(projectID).child(eventID).on('value', function(sna){
+      data.events.push(sna.val())
     })
+
+    render_events()
+
+  })
 })

@@ -65,7 +65,10 @@
 
   <!-- Import Your Components Below -->
   <script type="text/babel" src="components/navbar.jsx"></script>
+  <script type="text/babel" src="components/newtask.jsx"></script>
+  <script type="text/babel" src="components/newevent.jsx"></script>
   <script type="text/babel" src="components/tasklist.jsx"></script>
+  
   <script type="text/babel" src="components/eventlist.jsx"></script>
   <script type="text/babel" src="components/chatroom.jsx"></script>
   <script type="text/babel" src="components/app.jsx"></script>
@@ -105,14 +108,27 @@
       <MyComponents.NavBar/>,
       $('#navbar').get(0)
     );
+    ReactDOM.render(
+      <MyComponents.NewTask/>,
+      $('#new-task').get(0)
+    );
+    ReactDOM.render(
+      <MyComponents.NewEvent/>,
+      $('#new-event').get(0)
+    );
   </script>
 
   <!-- Component Divs -->
   <div id="navbar"></div>
   <div class="row">
     <h1></h1>
-    <div class="col s6" id="tasklist"></div>
-    <div class="col s6" id="eventlist"></div>
+    <div class="col s6">
+      <div id="new-task"></div>
+      <div id="tasklist"></div>
+      <div id="new-event"></div>
+      <div id="eventlist"></div>
+    </div>
+    
     <div class="col s6" id="chat"></div>
   </div>
 </body>
