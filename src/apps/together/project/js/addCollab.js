@@ -20,5 +20,23 @@ function assig(userID) {
 		console.log("pmem")
 		console.log(pmem)
 		projRef.child("projectMetaData").child("projectMembers").set(pmem)
+
+		var chatRoomID = snapshot.child("projectMetaData").child("relatedChatRoom").val()
+		console.log("chat")
+		console.log(chatRoomID)
+		var chatRoomref = new Firebase('https://prolanner.firebaseio.com').child("chatrooms").child(chatRoomID)
+		chatRoomref.once('value', function(snapshot){
+			console.log(snapshot.child("roomMetaData").child("roomMembers").val())
+			var cmem = snapshot.child("roomMetaData").child("roomMembers").val()
+			var uid = "github:"+userID
+			cmem.push(uid)
+			console.log("cmem")
+			console.log(cmem)
+			chatRoomref.child("roomMetaData").child("roomMembers").set(cmem)
+			//userRef.child('projectIDs').set(pid)
+		})
+
 	})
+
+	//var chatRoomID = new Firebase('https://prolanner.firebaseio.com').child("projects").child(projID).child("relatedChatRoom").val()
 }
