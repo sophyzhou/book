@@ -3,12 +3,26 @@
 //
 MyComponents.todo = React.createClass({
   render(){
+    var priority;
+    if (this.props.task.priority == 0) {
+      priority = "High"
+    }
+    else if (this.props.task.priority == 1) {
+      priority = "Medium"
+    }
+    else {
+      priority = "Low"
+    }
+
     if (this.props.task.taskStatus == 0) return (
-      <div className="card cyan darken-1">
-        <div className="card-content white-text">
-          <p>{this.props.task.taskName}</p>
+      <li>
+        <div className="collapsible-header cyan darken-1">{this.props.task.taskName}</div>
+        <div className="collapsible-body black-text">
+          <p><i>{this.props.task.taskDescription}</i><br id="top"/>
+          <b>Priority</b>: {priority}<br/>
+          <b>Deadline</b>: {this.props.task.deadline}</p>
         </div>
-      </div>
+      </li>
     );
     else return (
       <div></div>
@@ -18,12 +32,26 @@ MyComponents.todo = React.createClass({
 
 MyComponents.doing = React.createClass({
   render(){
+    var priority;
+    if (this.props.task.priority == 0) {
+      priority = "High"
+    }
+    else if (this.props.task.priority == 1) {
+      priority = "Medium"
+    }
+    else {
+      priority = "Low"
+    }
+
     if (this.props.task.taskStatus == 1) return (
-      <div className="card cyan darken-3">
-      <div className="card-content white-text">
-        <p>{this.props.task.taskName}</p>
-      </div>
-      </div>
+      <li>
+        <div className="collapsible-header cyan darken-3">{this.props.task.taskName}</div>
+        <div className="collapsible-body black-text">
+          <p><i>{this.props.task.taskDescription}</i><br/>
+          <b>Priority</b>: {priority}<br/>
+          <b>Deadline</b>: {this.props.task.deadline}</p>
+        </div>
+      </li>
     );
     else return (
       <div></div>
@@ -33,12 +61,26 @@ MyComponents.doing = React.createClass({
 
 MyComponents.done = React.createClass({
   render(){
+    var priority;
+    if (this.props.task.priority == 0) {
+      priority = "High"
+    }
+    else if (this.props.task.priority == 1) {
+      priority = "Medium"
+    }
+    else {
+      priority = "Low"
+    }
+
     if (this.props.task.taskStatus == 2) return (
-      <div className="card blue-grey lighten-2">
-      <div className="card-content white-text">
-        <p>{this.props.task.taskName}</p>
-      </div>
-      </div>
+      <li>
+        <div className="collapsible-header blue-grey lighten-2">{this.props.task.taskName}</div>
+        <div className="collapsible-body black-text">
+          <p><i>{this.props.task.taskDescription}</i><br/>
+          <b>Priority</b>: {priority}<br/>
+          <b>Deadline</b>: {this.props.task.deadline}</p>
+        </div>
+      </li>
     );
     else return (
       <div></div>
@@ -72,25 +114,38 @@ class TaskList extends React.Component {
           <div className="black-text center">
             <h5>DO</h5>
           </div>
-          {todo}
+          <ul className="collapsible" data-collapsible="accordion">
+            {todo}
+          </ul>
         </div>
 
         <div className="col s3 m4">
           <div className="black-text center">
             <h5>DOING</h5>
           </div>
-          {doing}
+          <ul className="collapsible" data-collapsible="accordion">
+            {doing}
+          </ul>
         </div>
 
         <div className="col s3 m4">
           <div className="black-text center">
             <h5>DONE</h5>
           </div>
-          {done}
+          <ul className="collapsible" data-collapsible="accordion">
+            {done}
+          </ul>
         </div>
 
       </div>
     );
+  }
+  componentDidMount(){
+    $(document).ready(function(){
+      $('.collapsible').collapsible({
+        accordion : false
+      });
+    });
   }
 }
 MyComponents.TaskList = TaskList
