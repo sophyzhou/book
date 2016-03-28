@@ -18,7 +18,7 @@ var messages={};
 prolannerRef.child('projects').child(projectID).child('projectMetaData').once('value', function(snapshot){
     console.log("ProjectID:" + projectID)
     roomID =  snapshot.val().relatedChatRoom
-    chatRef.child(roomID).child('roomMetaData').once("value", function(snapshot){
+    chatRef.child(roomID).child('roomMetaData').on("value", function(snapshot){
         chatRoomName = snapshot.val().roomName;
         var prolannerRef = new Firebase('https://prolanner.firebaseio.com/')
         snapshot.val().roomMembers.forEach(function(userID) {
