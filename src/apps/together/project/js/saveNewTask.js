@@ -19,4 +19,6 @@ function saveData() {
   }
 
   newEventRef.set(tasks)
+
+  window.top.close();
 }

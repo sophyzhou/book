@@ -1,20 +1,21 @@
 var prolannerRef = new Firebase('https://prolanner.firebaseio.com')
 
-
 function saveData() {
 
-	var eventDate = Math.floor(Date.now() / 1000)
-	var eventName = document.getElementById("event_name").value;
+  var location =  document.getElementById("location").value
+  var eventDate = document.getElementById("date").value
+  var eventName = document.getElementById("event_name").value;
   var projectID = window.location.hash.substring(1);
-	var newEventRef = prolannerRef.child('events').child(projectID).push()
+  var newEventRef = prolannerRef.child('events').child(projectID).push()
 
-	var events = {
-		eventDate: Math.floor(Date.now() / 1000),
-		eventName: eventName,
-		location : " "
-	}
+  var events = {
+      eventDate: eventDate,
+      eventName: eventName,
+      location : location
+  }
 
   newEventRef.set(events)
-	console.log(projectID)
+
+  window.top.close();
 
 }
