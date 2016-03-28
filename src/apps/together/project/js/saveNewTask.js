@@ -9,7 +9,7 @@ function saveData() {
   var taskName = document.getElementById("task_name").value;
   var projectID = window.location.hash.substring(1);
   var newTaskRef = prolannerRef.child('tasks').child(projectID).push()
-  var assignedTo = document.getElementById("githubID").innerHTML
+  var assignedTo = document.getElementById("name").innerHTML
 
   var tasks = {
     assignedTo: assignedTo,
