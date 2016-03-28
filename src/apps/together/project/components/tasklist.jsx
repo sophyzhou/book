@@ -18,7 +18,7 @@ MyComponents.todo = React.createClass({
       <li>
         <div className="collapsible-header cyan darken-1">{this.props.task.taskName}</div>
         <div className="collapsible-body black-text">
-          <p><i>{this.props.task.taskDescription}</i><br id="top"/>
+          <p><i>{this.props.task.taskDescription}</i><br/>
           <b>Priority</b>: {priority}<br/>
           <b>Deadline</b>: {this.props.task.deadline}</p>
         </div>

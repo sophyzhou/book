@@ -1,13 +1,16 @@
 MyComponents.event = React.createClass({
   render(){
     return (
-    <li>
-      <div className="collapsible-header teal lighten-1">{this.props.event.eventName}</div>
-      <div className="collapsible-body black-text">
-        <b>Event Date</b>: {this.props.event.eventDate}<br/>
-        <b>Event location</b>: {this.props.event.location}
+      <div className="col s4">
+        <ul className="collection">
+          <li className="collection-item avatar teal lighten-1">
+            <i className="material-icons circle white teal-text">event</i>
+            <span className="title">{this.props.event.eventName}</span>
+              <p><b>Location</b>: {this.props.event.location}<br/>
+              <b>Date</b>: {this.props.event.eventDate}</p>
+          </li>
+        </ul>
       </div>
-    </li>
     );
 
   }
@@ -21,26 +24,13 @@ class EventList extends React.Component {
   render() {
     var event = this.props.events.map(function(e, i){
       return <MyComponents.event event={e} key={i} />
-    });
-
+    }); 
     return (
-    <div className="row">
-      <div className="col s3 m5">
-        <ul className="collapsible" data-collapsible="accordion">
-          {event}
-        </ul>
+      <div className="row">
+        {event}
       </div>
-    </div>
-
     );
   }
-  componentDidMount(){
-  $(document).ready(function(){
-    $('.collapsible').collapsible({
-      accordion : false
-    });
-  });
-}
 }
 
 MyComponents.EventList = EventList
