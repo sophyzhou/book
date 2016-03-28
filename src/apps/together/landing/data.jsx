@@ -37,17 +37,25 @@ function render(){
 var firebaseRef = new Firebase('https://prolanner.firebaseio.com')
 
 // Real-time Data (load constantly on changes)
-firebaseRef.once('value', function(snapshot){
+firebaseRef.on('value', function(snapshot){
    
     if(actions.logged) {
       var projects = data.user.projectIDs
       data.projects=[]
+      console.log("Projects inside actions.looged: ")
+      console.log(projects)
       for (var i in projects) {
-        var projRef = firebaseRef.child("projects").child(projects[i])
-        projRef.on('value',function(snapshot){
-          data.projects.push(snapshot.val())
-          render()
-        })
+        if(projects[i] && projects[i]!="undefined"){
+          console.log("not null")
+          var projRef = firebaseRef.child("projects").child(projects[i])
+          projRef.on('value',function(snapshot){
+            data.projects.push(snapshot.val())
+            render()
+          })
+        }
+        else {
+          console.log("Project is null")
+        }
       }
     }
 
@@ -83,7 +91,7 @@ actions.login = function(){
       var isUserPresent;
       var gid = "github:"+authData.github.id
 
-      userRef.once('value', function(snapshot){
+      userRef.on('value', function(snapshot){
         console.log("exists:"+snapshot.child(gid).exists())
         if(snapshot.child(gid).exists()==true) {
           isUserPresent = true
@@ -97,11 +105,13 @@ actions.login = function(){
             console.log(projects)
             data.projects=[]
             for (var i in projects) {
-              var projRef = firebaseRef.child("projects").child(projects[i])
-              projRef.on('value',function(snapshot){
-                data.projects.push(snapshot.val())
-                render()
-              })
+              if(projects[i] && projects[i]!="undefined") {
+                var projRef = firebaseRef.child("projects").child(projects[i])
+                projRef.on('value',function(snapshot){
+                  data.projects.push(snapshot.val())
+                  render()
+                })
+              }
             }
           })
         }
