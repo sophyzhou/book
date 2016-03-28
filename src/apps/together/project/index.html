@@ -145,6 +145,8 @@
     );
   </script>
 
+  <script type="text/javascript" src="js/addCollab.js"></script>
+
   <!-- Component Divs -->
   <div id="navbar"></div>
   <div class="row">
@@ -158,5 +160,30 @@
     
     <div class="col s6" id="chat"></div>
   </div>
+
+  <div class="row">
+          <div class="input-field col s12">
+            <a id="changeName" class='dropdown-button btn' href='#' data-activates='dropdown1'>Add collaborator</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+              
+            </ul>
+            
+            
+          </div>
+        </div>
+  <script>
+    
+      var userRef = new Firebase('https://prolanner.firebaseio.com').child("users")
+      userRef.on('value', function(snapshot){
+      snapshot.forEach(function(s){
+        console.log(s.child("userID").val())
+        $('#dropdown1').append('<li onclick="assig(\''+s.child("userID").val()+'\''+')">'+s.child("userName").val()+'</li>')
+      })
+    })
+    
+    
+  </script>
 </body>
 </html>
