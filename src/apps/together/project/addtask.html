@@ -112,8 +112,16 @@
 
         <div class="row">
           <div class="input-field col s12">
-            <input placeholder="[WE STILL NEED TO FIGURE THIS OUT]" value="" id="assigned" type="text" class="validate">
-            <label for="assigned">Assigned To</label>
+            <a id="changeName" class='dropdown-button btn' href='#' data-activates='dropdown1'>Assign To</a>
+
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+              
+            </ul>
+            <div id="name"></div>
+            <div id="githubID"></div>
+            
+            
           </div>
         </div>
 
@@ -143,6 +151,30 @@
   $(document).ready(function() {
     $('select').material_select();
   });
+
+  console.log("Inside script")
+  var projRef = new Firebase('https://prolanner.firebaseio.com').child("projects").child(window.location.hash.substring(1)).child("projectMetaData")
+
+  projRef.once('value', function(snapshot){
+    console.log(snapshot.child("projectMembers").val())
+    var projMem = snapshot.child("projectMembers").val()
+    for(var i in projMem) {
+      console.log("asds"+projMem[i])
+      var userRef = new Firebase('https://prolanner.firebaseio.com').child("users").child(projMem[i])
+      userRef.on('value', function(sn) {
+        console.log(sn.child("displayName").val())
+        $('#dropdown1').append('<li onclick="assig(\''+projMem[i]+'\','+'\''+sn.child("displayName").val()+'\''+')">'+sn.child("displayName").val()+'</li>')
+        })
+    }
+  })
+              //var s= document.getElementById("one");
+              //s.innerHTML = "newvalue";
+  console.log(window.location.hash.substring(1))
+            
+  function assig(id, name) {
+    $('#name').append(name)
+    $('#githubID').append(id)
+  }
   </script>
 
 </body>
